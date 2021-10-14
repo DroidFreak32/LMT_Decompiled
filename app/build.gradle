@@ -34,6 +34,11 @@ dependencies {
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+
+// For android.support.v13.app.FragmentStatePagerAdapter;
+    implementation 'com.android.support:support-fragment:28.0.0'
+    implementation 'com.android.support:support-v13:28.0.0'
+
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     implementation 'android.arch.lifecycle:livedata:1.1.1'
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
