@@ -11,8 +11,24 @@ android {
         targetSdk 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //AndroidStudioProjects/LMT/app/src/main/java/com/example/lmt/SettingsValuesBase.java:179: error: cannot find symbol
+        //String string = loadString(TouchServiceResult.names[gesture] + " String", BuildConfig.FLAVOR);
+        flavorDimensions "version"
+        productFlavors {
+            demo {
+                // Assigns this product flavor to the "version" flavor dimension.
+                // This property is optional if you are using only one dimension.
+                dimension "version"
+                applicationIdSuffix ".demo"
+                versionNameSuffix "-demo"
+            }
+            full {
+                dimension "version"
+                applicationIdSuffix ".full"
+                versionNameSuffix "-full"
+            }
+        }
     }
 
     buildTypes {
@@ -34,11 +50,11 @@ dependencies {
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
 
 // For android.support.v13.app.FragmentStatePagerAdapter;
     implementation 'com.android.support:support-fragment:28.0.0'
     implementation 'com.android.support:support-v13:28.0.0'
-
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     implementation 'android.arch.lifecycle:livedata:1.1.1'
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
