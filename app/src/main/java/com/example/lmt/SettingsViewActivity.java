@@ -32,7 +32,7 @@ public class SettingsViewActivity extends Activity {
         int pos5 = pos4 + 1;
         settingsViewHelper.posSetMode = pos4;
         settingsViewHelper.getClass();
-        adapter.addSection("General", new SettingsViewHelper.SettingsSimpleAdapter(this, touchServiceSettings, this.mSettingsHelper.posOffsetTouchservice, false));
+        adapter.addSection("General", this.mSettingsHelper.new SettingsSimpleAdapter(this, touchServiceSettings, this.mSettingsHelper.posOffsetTouchservice, false));
         List<Map<String, ?>> pieActivation = new LinkedList<>();
         pieActivation.add(SeparatedListAdapter.createItem("Activation area position", "Activation area position, default = all"));
         pieActivation.add(SeparatedListAdapter.createItem("Activation area thickness", "Activation area thickness in pixel, default = 50"));
@@ -69,7 +69,7 @@ public class SettingsViewActivity extends Activity {
         int pos13 = pos12 + 1;
         settingsViewHelper3.posClearBlacklistPie = pos12;
         settingsViewHelper3.getClass();
-        adapter.addSection("Pie Activation", new SettingsViewHelper.SettingsSimpleAdapter(this, pieActivation, this.mSettingsHelper.posOffsetPieActivation, false));
+        adapter.addSection("Pie Activation", this.mSettingsHelper.new SettingsSimpleAdapter(this, pieActivation, this.mSettingsHelper.posOffsetPieActivation, false));
         List<Map<String, ?>> pieStyle = new LinkedList<>();
         pieStyle.add(SeparatedListAdapter.createItem("Pie colors", "0 = blue, 1 = red, 2 = grey, 3 = none, 4 = white, 5 = magenta/yellow, 6 = green/outline, 7 = red/outline, default = 0"));
         pieStyle.add(SeparatedListAdapter.createItem("Pie inner radius", "Radius in dip, default = 60"));
@@ -96,7 +96,7 @@ public class SettingsViewActivity extends Activity {
         int pos21 = pos20 + 1;
         settingsViewHelper4.posPieStartGap = pos20;
         settingsViewHelper4.getClass();
-        adapter.addSection("Pie Style", new SettingsViewHelper.SettingsSimpleAdapter(this, pieStyle, this.mSettingsHelper.posOffsetPieStyle, false));
+        adapter.addSection("Pie Style", this.mSettingsHelper.new SettingsSimpleAdapter(this, pieStyle, this.mSettingsHelper.posOffsetPieStyle, false));
         List<Map<String, ?>> pieBehavior = new LinkedList<>();
         pieBehavior.add(SeparatedListAdapter.createItem("Longpress time", "Min time for longpress in ms, default = 500"));
         pieBehavior.add(SeparatedListAdapter.createItem("Animation time", "Time for the pie animation in ms, default = 80"));
@@ -120,7 +120,7 @@ public class SettingsViewActivity extends Activity {
         int pos28 = pos27 + 1;
         settingsViewHelper5.posPieExpandTriggerArea = pos27;
         settingsViewHelper5.getClass();
-        adapter.addSection("Pie Behavior", new SettingsViewHelper.SettingsSimpleAdapter(this, pieBehavior, this.mSettingsHelper.posOffsetPieBehavior, false));
+        adapter.addSection("Pie Behavior", this.mSettingsHelper.new SettingsSimpleAdapter(this, pieBehavior, this.mSettingsHelper.posOffsetPieBehavior, false));
         List<Map<String, ?>> pieIcons = new LinkedList<>();
         pieIcons.add(SeparatedListAdapter.createItem("Rotate images", "Rotate icons based on pie angle"));
         pieIcons.add(SeparatedListAdapter.createItem("Set nav button style", "Switch between different icon sets for the nav buttons"));
@@ -141,7 +141,7 @@ public class SettingsViewActivity extends Activity {
         int pos34 = pos33 + 1;
         settingsViewHelper6.posPieUserImageSearchPath = pos33;
         settingsViewHelper6.getClass();
-        adapter.addSection("Pie Icons", new SettingsViewHelper.SettingsSimpleAdapter(this, pieIcons, this.mSettingsHelper.posOffsetPieIcons, false));
+        adapter.addSection("Pie Icons", this.mSettingsHelper.new SettingsSimpleAdapter(this, pieIcons, this.mSettingsHelper.posOffsetPieIcons, false));
         List<Map<String, ?>> pieExtensions = new LinkedList<>();
         pieExtensions.add(SeparatedListAdapter.createItem("Pie pointer edge activation", "Configure if the pie pointer feature can be activated from the edges, default = disabled"));
         pieExtensions.add(SeparatedListAdapter.createItem("Pie pointer warp factor", "Configure the warp factor for the pie pointer feature,\ndefault = 300%, min = 200%, max = 1000%"));
@@ -165,7 +165,7 @@ public class SettingsViewActivity extends Activity {
         int i = pos40 + 1;
         settingsViewHelper7.posPieStatusInfoFont = pos40;
         settingsViewHelper7.getClass();
-        adapter.addSection("Pie Extensions", new SettingsViewHelper.SettingsSimpleAdapter(this, pieExtensions, this.mSettingsHelper.posOffsetPieExtensions, false));
+        adapter.addSection("Pie Extensions", this.mSettingsHelper.new SettingsSimpleAdapter(this, pieExtensions, this.mSettingsHelper.posOffsetPieExtensions, false));
         ListView list = new ListView(this);
         list.setAdapter((ListAdapter) adapter);
         list.setOnItemClickListener(this.mSettingsHelper);

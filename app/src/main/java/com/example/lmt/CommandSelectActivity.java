@@ -109,11 +109,11 @@ public class CommandSelectActivity extends Activity implements AdapterView.OnIte
         pieActionsCommands.add(SeparatedListAdapter.createItem(Action.names[i40], Action.captions[i40]));
         pieActionsCommands.add(SeparatedListAdapter.createItem(Action.names[i41], Action.captions[i41]));
         SeparatedListAdapter adapter = new SeparatedListAdapter(this);
-        adapter.addSection(getString(C0536R.string.commands_normal_commands), new CommandSelectSimpleAdapter(this, normalCommands, 0));
-        adapter.addSection(getString(C0536R.string.commands_toogle_commands), new CommandSelectSimpleAdapter(this, toggleCommands, 19));
-        adapter.addSection(getString(C0536R.string.commands_advanced_commands), new CommandSelectSimpleAdapter(this, advancedCommands, 25));
-        adapter.addSection(getString(C0536R.string.commands_app_drawer_commands), new CommandSelectSimpleAdapter(this, appDrawerCommands, 39));
-        adapter.addSection(getString(C0536R.string.commands_pie_action_commands), new CommandSelectSimpleAdapter(this, pieActionsCommands, 43));
+        adapter.addSection(getString(R.string.commands_normal_commands), new CommandSelectSimpleAdapter(this, normalCommands, 0));
+        adapter.addSection(getString(R.string.commands_toogle_commands), new CommandSelectSimpleAdapter(this, toggleCommands, 19));
+        adapter.addSection(getString(R.string.commands_advanced_commands), new CommandSelectSimpleAdapter(this, advancedCommands, 25));
+        adapter.addSection(getString(R.string.commands_app_drawer_commands), new CommandSelectSimpleAdapter(this, appDrawerCommands, 39));
+        adapter.addSection(getString(R.string.commands_pie_action_commands), new CommandSelectSimpleAdapter(this, pieActionsCommands, 43));
         ListView list = new ListView(this);
         list.setAdapter((ListAdapter) adapter);
         list.setOnItemClickListener(this);
@@ -145,8 +145,8 @@ public class CommandSelectActivity extends Activity implements AdapterView.OnIte
             if (action.getType() == this.mPos) {
                 text = action.getString();
             }
-            String string = getString(C0536R.string.dialog_input);
-            new InputDialog(this, string, getString(C0536R.string.dialog_define_the) + " " + Action.names[this.mPos] + " " + getString(C0536R.string.dialog_to_be_executed), text, false) {
+            String string = getString(R.string.dialog_input);
+            new InputDialog(this, string, getString(R.string.dialog_define_the) + " " + Action.names[this.mPos] + " " + getString(R.string.dialog_to_be_executed), text, false) {
                 /* class com.noname81.lmt.CommandSelectActivity.AlertDialog$BuilderC05131 */
 
                 @Override // com.noname81.lmt.InputDialog
@@ -164,16 +164,16 @@ public class CommandSelectActivity extends Activity implements AdapterView.OnIte
         private int mOffset;
 
         CommandSelectSimpleAdapter(Context context, List<? extends Map<String, ?>> data, int offset) {
-            super(context, data, C0536R.layout.listitem_icondescriptionicon, new String[]{"title", "caption"}, new int[]{C0536R.C0538id.listitem_icondescriptionicon_text, C0536R.C0538id.listitem_icondescriptionicon_caption});
+            super(context, data, R.layout.listitem_icondescriptionicon, new String[]{"title", "caption"}, new int[]{R.id.listitem_icondescriptionicon_text, R.id.listitem_icondescriptionicon_caption});
             this.mOffset = offset;
         }
 
         public View getView(final int position, View convertView, ViewGroup parent) {
             View row = super.getView(position, convertView, parent);
-            ImageView icon = (ImageView) row.findViewById(C0536R.C0538id.listitem_icondescriptionicon_icon);
-            ImageView icon2 = (ImageView) row.findViewById(C0536R.C0538id.listitem_icondescriptionicon_icon2);
+            ImageView icon = (ImageView) row.findViewById(R.id.listitem_icondescriptionicon_icon);
+            ImageView icon2 = (ImageView) row.findViewById(R.id.listitem_icondescriptionicon_icon2);
             IconUtils.setMaxSizeForImageView(CommandSelectActivity.this.getApplicationContext(), icon);
-            new AsyncDrawableTask(icon, C0536R.C0537drawable.none) {
+            new AsyncDrawableTask(icon, R.drawable.none) {
                 /* class com.noname81.lmt.CommandSelectActivity.CommandSelectSimpleAdapter.AsyncTaskC05141 */
 
                 /* access modifiers changed from: protected */

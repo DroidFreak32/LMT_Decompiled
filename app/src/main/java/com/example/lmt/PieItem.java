@@ -1,5 +1,6 @@
 package com.example.lmt;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -31,11 +32,11 @@ public class PieItem {
         if (color != this.mColor) {
             if (color != 0) {
                 Drawable drawable = this.mDrawableShort;
-                if (!(drawable == null || drawable.getChangingConfigurations() == 1)) {
+                if (!(drawable == null || drawable.getChangingConfigurations() == ActivityInfo.CONFIG_MCC)) {
                     this.mDrawableShort.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
                 }
                 Drawable drawable2 = this.mDrawableLong;
-                if (!(drawable2 == null || drawable2.getChangingConfigurations() == 1)) {
+                if (!(drawable2 == null || drawable2.getChangingConfigurations() ==  ActivityInfo.CONFIG_MCC)) {
                     this.mDrawableLong.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
                 }
             } else {

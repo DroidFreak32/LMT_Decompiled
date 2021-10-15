@@ -3,6 +3,7 @@ package com.example.lmt;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -78,6 +79,7 @@ public class PieContainer {
             }
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.Q)
         private void setExclusionRects() {
             Rect boundingBox = new Rect();
             List<Rect> exclusions = Collections.singletonList(boundingBox);
@@ -147,7 +149,7 @@ public class PieContainer {
 
     PieContainer(Context context) {
         this.mSettings = SettingsValues.getInstance(context);
-        this.mWindowManager = (WindowManager) context.getSystemService("window");
+        this.mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         this.mPieControl = new PieControl(context);
         this.mPieLayout1 = new PieLayout(context, false);
         this.mPieLayout2 = new PieLayout(context, false);

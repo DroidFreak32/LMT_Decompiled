@@ -114,16 +114,16 @@ public class GesturesFragment extends Fragment implements AdapterView.OnItemClic
         private int mOffset;
 
         CommandSimpleAdapterGestures(Context context, List<? extends Map<String, ?>> data, int offset) {
-            super(context, data, R.layout.listitem_icondescriptionicon, new String[]{"title", "caption"}, new int[]{R.C0538id.listitem_icondescriptionicon_text, R.C0538id.listitem_icondescriptionicon_caption});
+            super(context, data, R.layout.listitem_icondescriptionicon, new String[]{"title", "caption"}, new int[]{R.id.listitem_icondescriptionicon_text, R.id.listitem_icondescriptionicon_caption});
             this.mOffset = offset;
         }
 
         public View getView(final int position, View convertView, ViewGroup parent) {
             View row = super.getView(position, convertView, parent);
-            ImageView icon = (ImageView) row.findViewById(R.C0538id.listitem_icondescriptionicon_icon);
-            ImageView icon2 = (ImageView) row.findViewById(R.C0538id.listitem_icondescriptionicon_icon2);
+            ImageView icon = (ImageView) row.findViewById(R.id.listitem_icondescriptionicon_icon);
+            ImageView icon2 = (ImageView) row.findViewById(R.id.listitem_icondescriptionicon_icon2);
             IconUtils.setMaxSizeForImageView(GesturesFragment.this.getActivity(), icon);
-            new AsyncDrawableTask(icon, R.C0537drawable.none) {
+            new AsyncDrawableTask(icon, R.drawable.none) {
                 /* class com.noname81.lmt.GesturesFragment.CommandSimpleAdapterGestures.AsyncTaskC05161 */
 
                 /* access modifiers changed from: protected */
@@ -133,7 +133,7 @@ public class GesturesFragment extends Fragment implements AdapterView.OnItemClic
                 }
             }.execute(new Void[0]);
             IconUtils.setMaxSizeForImageView(GesturesFragment.this.getActivity(), icon2);
-            new AsyncDrawableTask(icon2, R.C0537drawable.none) {
+            new AsyncDrawableTask(icon2, R.drawable.none) {
                 /* class com.noname81.lmt.GesturesFragment.CommandSimpleAdapterGestures.AsyncTaskC05172 */
 
                 /* access modifiers changed from: protected */

@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.SystemClock;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class AccessibilityHandler extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent event) {
         ApplicationInfo ai;
         String text;
-        if (event.getEventType() == AccessibilityEvent.WINDOWS_CHANGE_FOCUSED && event.getClassName().equals("android.app.Notification")) {
+        if (event.getEventType() == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED && event.getClassName().equals("android.app.Notification")) {
             Notification notification = (Notification) event.getParcelableData();
             String packageName = String.valueOf(event.getPackageName());
             PackageManager pm = getPackageManager();
@@ -84,7 +85,7 @@ public class AccessibilityHandler extends AccessibilityService {
     static boolean isAccessibilityAvailable(Context context, boolean trace) {
         boolean result = Build.VERSION.SDK_INT >= 16 && mInitialized && instance != null;
         if (trace && !result) {
-            Toast.makeText(context, (int) R.string.accessibility_activate_lmts_accessibility_service, 0).show();
+            Toast.makeText(context, (int) R.string.accessibility_activate_lmts_accessibility_service, Toast.LENGTH_SHORT).show();
             Log.e(TAG, "Please activate LMT's accessibility service!");
         }
         return result;
@@ -103,6 +104,7 @@ public class AccessibilityHandler extends AccessibilityService {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private static GestureDescription createClick(float x, float y) {
         Path clickPath = new Path();
         clickPath.moveTo(x, y);

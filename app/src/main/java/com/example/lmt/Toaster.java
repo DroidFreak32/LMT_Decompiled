@@ -19,7 +19,7 @@ public class Toaster {
     private Context mContext;
     private int mMode;
     private SettingsValues mSettings = SettingsValues.getInstance(this.mContext);
-    private Vibrator mVibrator = ((Vibrator) this.mContext.getSystemService("vibrator"));
+    private Vibrator mVibrator = ((Vibrator) this.mContext.getSystemService(Context.VIBRATOR_SERVICE));
 
     private Toaster(Context context) {
         this.mContext = context;
@@ -57,17 +57,17 @@ public class Toaster {
     }
 
     private void showDebug(TouchServiceResult result) {
-        Toast.makeText(this.mContext, result.toString(), 0).show();
+        Toast.makeText(this.mContext, result.toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void showImage(TouchServiceResult result) {
         if (result.getGesture() < 14) {
             try {
-                View layout = ((LayoutInflater) this.mContext.getSystemService("layout_inflater")).inflate(C0536R.layout.toaster, (ViewGroup) null);
-                ((ImageView) layout.findViewById(C0536R.C0538id.image)).setImageResource(this.mContext.getResources().getIdentifier(TouchServiceResult.names[result.getGesture()].toLowerCase(), "drawable", this.mContext.getPackageName()));
+                View layout = ((LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.toaster, (ViewGroup) null);
+                ((ImageView) layout.findViewById(R.id.image)).setImageResource(this.mContext.getResources().getIdentifier(TouchServiceResult.names[result.getGesture()].toLowerCase(), "drawable", this.mContext.getPackageName()));
                 Toast toast = new Toast(this.mContext.getApplicationContext());
                 toast.setGravity(16, 0, 0);
-                toast.setDuration(0);
+                toast.setDuration(Toast.LENGTH_SHORT);
                 toast.setView(layout);
                 toast.show();
             } catch (Exception e) {

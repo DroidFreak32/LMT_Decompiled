@@ -182,7 +182,7 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
 
     private Action loadPieAction(int pie) {
         int type = loadInt("PieItem" + pie + " Type", 1);
-        String string = loadString("PieItem" + pie + " String", BuildConfig.FLAVOR);
+        String string = loadString("PieItem" + pie + " String", BuildConfig.VERSION_NAME);
         return new Action(type, string, loadString("PieItem" + pie + " Icon", BuildConfig.FLAVOR), this.mContext);
     }
 

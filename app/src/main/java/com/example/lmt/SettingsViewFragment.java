@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import java.util.LinkedList;
+import com.example.lmt.SettingsViewHelper.SettingsSimpleAdapter;
+import com.example.lmt.SettingsViewHelper;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +41,11 @@ public class SettingsViewFragment extends Fragment {
         int pos4 = pos3 + 1;
         settingsViewHelper.posSetMode = pos3;
         settingsViewHelper.getClass();
-        adapter.addSection("General",
-                new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), touchServiceSettings, this.mSettingsHelper.posOffsetTouchservice, false));
+
+//        'com.example.lmt.SettingsViewHelper' is not an enclosing class
+//        adapter.addSection("General", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), touchServiceSettings, this.mSettingsHelper.posOffsetTouchservice, false));
+
+        adapter.addSection("General", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), touchServiceSettings, this.mSettingsHelper.posOffsetTouchservice, false));
         if (featureSet < 2) {
             List<Map<String, ?>> gestureRecognition = new LinkedList<>();
             gestureRecognition.add(SeparatedListAdapter.createItem("Auto configuration", "If auto configuration fails, set the input device and touchscreen to screen factors below manually"));
@@ -59,7 +64,7 @@ public class SettingsViewFragment extends Fragment {
             int pos9 = pos8 + 1;
             settingsViewHelper2.posTouchscreenScreenFactorY = pos8;
             settingsViewHelper2.getClass();
-            adapter.addSection("Gesture recognition", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), gestureRecognition, this.mSettingsHelper.posOffsetIsas, false));
+            adapter.addSection("Gesture recognition", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), gestureRecognition, this.mSettingsHelper.posOffsetIsas, false));
             List<Map<String, ?>> gestureSettings = new LinkedList<>();
             gestureSettings.add(SeparatedListAdapter.createItem("Feedback style", "Define the gesture feedback style"));
             gestureSettings.add(SeparatedListAdapter.createItem("Vibration Time", "Define the vibration time in ms, default = 30"));
@@ -86,7 +91,7 @@ public class SettingsViewFragment extends Fragment {
             int pos17 = pos16 + 1;
             settingsViewHelper3.posClearBlacklist = pos16;
             settingsViewHelper3.getClass();
-            adapter.addSection("Gestures", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), gestureSettings, this.mSettingsHelper.posOffsetGestures, false));
+            adapter.addSection("Gestures", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), gestureSettings, this.mSettingsHelper.posOffsetGestures, false));
             List<Map<String, ?>> isasSettings = new LinkedList<>();
             isasSettings.add(SeparatedListAdapter.createItem("Min bounding box size", "Min bounding box size in pixel, 0 = disabled, 1 = enabled, >1 = enabled and size in pixel, default = 1"));
             isasSettings.add(SeparatedListAdapter.createItem("Activation area thickness", "Activation area width in pixel, default = 60"));
@@ -97,7 +102,7 @@ public class SettingsViewFragment extends Fragment {
             settingsViewHelper4.posSingleSwipesBBox = pos18;
             settingsViewHelper4.posSingleSwipesAArea = pos19;
             settingsViewHelper4.getClass();
-            adapter.addSection("ISAS", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), isasSettings, this.mSettingsHelper.posOffsetIsas, false));
+            adapter.addSection("ISAS", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), isasSettings, this.mSettingsHelper.posOffsetIsas, false));
             pos4 = pos19 + 1;
         }
         if (featureSet > 0) {
@@ -135,7 +140,7 @@ public class SettingsViewFragment extends Fragment {
             int pos27 = pos26 + 1;
             settingsViewHelper6.posClearBlacklistPie = pos26;
             settingsViewHelper6.getClass();
-            adapter.addSection("Pie Activation", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), pieActivation, this.mSettingsHelper.posOffsetPieActivation, false));
+            adapter.addSection("Pie Activation", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), pieActivation, this.mSettingsHelper.posOffsetPieActivation, false));
             List<Map<String, ?>> pieStyle = new LinkedList<>();
             pieStyle.add(SeparatedListAdapter.createItem("Pie colors", "0 = blue, 1 = red, 2 = grey, 3 = none, 4 = white, 5 = magenta/yellow, 6 = green/outline, 7 = red/outline, default = 0"));
             pieStyle.add(SeparatedListAdapter.createItem("Pie inner radius", "Radius in dip, default = 60"));
@@ -162,7 +167,7 @@ public class SettingsViewFragment extends Fragment {
             int pos35 = pos34 + 1;
             settingsViewHelper7.posPieStartGap = pos34;
             settingsViewHelper7.getClass();
-            adapter.addSection("Pie Style", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), pieStyle, this.mSettingsHelper.posOffsetPieStyle, false));
+            adapter.addSection("Pie Style", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), pieStyle, this.mSettingsHelper.posOffsetPieStyle, false));
             List<Map<String, ?>> pieBehavior = new LinkedList<>();
             pieBehavior.add(SeparatedListAdapter.createItem("Longpress time", "Min time for longpress in ms, default = 500"));
             pieBehavior.add(SeparatedListAdapter.createItem("Animation time", "Time for the pie animation in ms, default = 80"));
@@ -186,7 +191,7 @@ public class SettingsViewFragment extends Fragment {
             int pos42 = pos41 + 1;
             settingsViewHelper8.posPieExpandTriggerArea = pos41;
             settingsViewHelper8.getClass();
-            adapter.addSection("Pie Behavior", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), pieBehavior, this.mSettingsHelper.posOffsetPieBehavior, false));
+            adapter.addSection("Pie Behavior", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), pieBehavior, this.mSettingsHelper.posOffsetPieBehavior, false));
             List<Map<String, ?>> pieIcons = new LinkedList<>();
             pieIcons.add(SeparatedListAdapter.createItem("Rotate images", "Rotate icons based on pie angle"));
             pieIcons.add(SeparatedListAdapter.createItem("Set nav button style", "Switch between different icon sets for the nav buttons"));
@@ -207,7 +212,7 @@ public class SettingsViewFragment extends Fragment {
             int pos48 = pos47 + 1;
             settingsViewHelper9.posPieUserImageSearchPath = pos47;
             settingsViewHelper9.getClass();
-            adapter.addSection("Pie Icons", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), pieIcons, this.mSettingsHelper.posOffsetPieIcons, false));
+            adapter.addSection("Pie Icons", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), pieIcons, this.mSettingsHelper.posOffsetPieIcons, false));
             List<Map<String, ?>> pieExtensions = new LinkedList<>();
             pieExtensions.add(SeparatedListAdapter.createItem("Pie pointer edge activation", "Configure if the pie pointer feature can be activated from the edges (Also consider the pie pointer action to activate the feature!), default = disabled"));
             pieExtensions.add(SeparatedListAdapter.createItem("Pie pointer warp factor", "Configure the warp factor for the pie pointer feature,\ndefault = 300%, min = 200%, max = 1000%"));
@@ -231,7 +236,7 @@ public class SettingsViewFragment extends Fragment {
             int i = pos54 + 1;
             settingsViewHelper10.posPieStatusInfoFont = pos54;
             settingsViewHelper10.getClass();
-            adapter.addSection("Pie Extensions", new SettingsViewHelper.SettingsSimpleAdapter(getActivity(), pieExtensions, this.mSettingsHelper.posOffsetPieExtensions, false));
+            adapter.addSection("Pie Extensions", this.mSettingsHelper.new SettingsSimpleAdapter(getActivity(), pieExtensions, this.mSettingsHelper.posOffsetPieExtensions, false));
         }
         ListView list = new ListView(getActivity());
         list.setAdapter((ListAdapter) adapter);

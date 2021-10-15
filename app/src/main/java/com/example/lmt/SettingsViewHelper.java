@@ -84,6 +84,10 @@ class SettingsViewHelper implements AdapterView.OnItemClickListener {
         this.mTouchServiceNative = TouchServiceNative.getInstance(activity);
     }
 
+    public SettingsViewHelper() {
+
+    }
+
     /* JADX WARNING: Code restructure failed: missing block: B:34:?, code lost:
         r13 = new android.util.DisplayMetrics();
         ((android.view.WindowManager) r21.mActivity.getSystemService("window")).getDefaultDisplay().getRealMetrics(r13);

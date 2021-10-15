@@ -113,7 +113,7 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
         this.mAnimationActive = true;
         this.mAnimationTime = this.mSettings.loadPieAnimation();
         this.mSensorActivated = this.mSettings.loadPieShowStatusInfos() == 3;
-        this.mSensorManager = (SensorManager) this.mContext.getSystemService("sensor");
+        this.mSensorManager = (SensorManager) this.mContext.getSystemService(Context.SENSOR_SERVICE);
         if (this.mAnimationActive) {
             this.mSensorAnimator = new ValueAnimator();
         }
@@ -587,7 +587,7 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
 
     private String getConnectivityString() {
         NetworkInfo ni;
-        ConnectivityManager cm = (ConnectivityManager) this.mContext.getSystemService("connectivity");
+        ConnectivityManager cm = (ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         String connectivity = "Not connected";
         if (cm == null || (ni = cm.getActiveNetworkInfo()) == null) {
             return connectivity;
@@ -599,7 +599,7 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
             connectivity = connectivity + " | " + ni.getTypeName();
         }
         if (ni.getType() == 1) {
-            WifiManager wifi = (WifiManager) this.mContext.getApplicationContext().getSystemService("wifi");
+            WifiManager wifi = (WifiManager) this.mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (wifi.getWifiState() != 3) {
                 return connectivity;
             }
@@ -612,7 +612,7 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
     }
 
     private String getRingerModeString() {
-        AudioManager am = (AudioManager) this.mContext.getSystemService("audio");
+        AudioManager am = (AudioManager) this.mContext.getSystemService(Context.AUDIO_SERVICE);
         if (am == null) {
             return BuildConfig.FLAVOR;
         }
@@ -642,7 +642,7 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
 
     private String getMemInfo() {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        ((ActivityManager) this.mContext.getSystemService("activity")).getMemoryInfo(mi);
+        ((ActivityManager) this.mContext.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if (Build.VERSION.SDK_INT >= 16) {
             return "Used " + ((mi.totalMem - mi.availMem) / PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED) + " MB | Free " + (mi.availMem / PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED) + " MB";
         }

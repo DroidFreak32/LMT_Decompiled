@@ -136,7 +136,8 @@ public class PieFragment extends Fragment implements AdapterView.OnItemClickList
                     return IconUtils.getIconForAction(PieFragment.this.getActivity(), SettingsValues.getInstance(PieFragment.this.getActivity()).getPieAction(CommandSimpleAdapter.this.mOffset + position), IconUtils.getNamePie(CommandSimpleAdapter.this.mOffset + position));
                 }
             }.execute(new Void[0]);
-            icon2.setOnClickListener(new View.OnClickListener(this.mOffset + position) {
+//TODO            icon2.setOnClickListener(new View.OnClickListener(this.mOffset + position) {
+            icon2.setOnClickListener(new View.OnClickListener() {
                 /* class com.noname81.lmt.PieFragment.CommandSimpleAdapter.AnonymousClass1OnClickListenerWithPosition */
                 private int mPosition;
 

@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -141,26 +142,26 @@ public class TouchService extends Service {
     /* access modifiers changed from: package-private */
     public Notification createNotification() {
         if (Build.VERSION.SDK_INT >= 26) {
-            ((NotificationManager) getSystemService("notification")).createNotificationChannel(new NotificationChannel(this.NOTIFICATION_CHANNEL_ID, this.NOTIFICATION_CHANNEL_NAME, 0));
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(new NotificationChannel(this.NOTIFICATION_CHANNEL_ID, this.NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_NONE));
         }
         if (Build.VERSION.SDK_INT < 18) {
             return new Notification();
         }
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 777, new Intent(this, LMT.class), 268435456);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 777, new Intent(this, LMT.class), PendingIntent.FLAG_CANCEL_CURRENT);
         if (Build.VERSION.SDK_INT >= 26) {
-            return new Notification.Builder(this).setContentTitle("LMT").setContentText("Touch to open LMT").setContentIntent(contentIntent).setSmallIcon(C0536R.C0537drawable.piewhite_s).setChannelId(this.NOTIFICATION_CHANNEL_ID).build();
+            return new Notification.Builder(this).setContentTitle("LMT").setContentText("Touch to open LMT").setContentIntent(contentIntent).setSmallIcon(R.drawable.piewhite_s).setChannelId(this.NOTIFICATION_CHANNEL_ID).build();
         }
-        return new Notification.Builder(this).setContentTitle("LMT").setContentText("Touch to open LMT").setContentIntent(contentIntent).setSmallIcon(C0536R.C0537drawable.piewhite_s).setPriority(-2).build();
+        return new Notification.Builder(this).setContentTitle("LMT").setContentText("Touch to open LMT").setContentIntent(contentIntent).setSmallIcon(R.drawable.piewhite_s).setPriority(Notification.PRIORITY_MIN).build();
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "LMT started", 0).show();
+        Toast.makeText(this, "LMT started", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "TouchService started");
-        return 1;
+        return Service.START_STICKY;
     }
 
     public void onDestroy() {
-        Toast.makeText(this, "LMT stopped", 0).show();
+        Toast.makeText(this, "LMT stopped", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "TouchService stopped");
         TouchServiceNative touchServiceNative = this.mTouchServiceNative;
         if (touchServiceNative != null) {
@@ -196,7 +197,7 @@ public class TouchService extends Service {
         if (this.mSettings.getDays() > 0) {
             return true;
         }
-        Toast.makeText(this, "This version of LMT expired! Please install the latest version.", 1).show();
+        Toast.makeText(this, "This version of LMT expired! Please install the latest version.", Toast.LENGTH_LONG).show();
         return false;
     }
 }

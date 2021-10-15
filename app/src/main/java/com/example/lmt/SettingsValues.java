@@ -65,7 +65,7 @@ public class SettingsValues extends SettingsValuesBase {
 
     /* access modifiers changed from: package-private */
     public void rotate() {
-        WindowManager windowManager = (WindowManager) this.mContext.getSystemService("window");
+        WindowManager windowManager = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
         this.mOrientation = windowManager.getDefaultDisplay().getRotation();
         DisplayMetrics metrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getRealMetrics(metrics);
@@ -126,7 +126,7 @@ public class SettingsValues extends SettingsValuesBase {
             return rootContext.runCommandRemoteResult("am get-recent-app " + numberOfRecentApps, true);
         } else {
             long time = System.currentTimeMillis();
-            List<UsageStats> appList = ((UsageStatsManager) this.mContext.getSystemService("usagestats")).queryUsageStats(0, time - TimeUnit.DAYS.toMillis(1), time);
+            List<UsageStats> appList = ((UsageStatsManager) this.mContext.getSystemService(Context.USAGE_STATS_SERVICE)).queryUsageStats(0, time - TimeUnit.DAYS.toMillis(1), time);
             if (appList == null || appList.size() <= 0) {
                 return BuildConfig.FLAVOR;
             }

@@ -48,7 +48,7 @@ public class PermissionChecker {
         if (Build.VERSION.SDK_INT < 23 || hasPhoneCallPermission(activity, trace)) {
             return true;
         }
-        Toast.makeText(activity, (int) R.string.app_please_grant_phone_call_permission, 1).show();
+        Toast.makeText(activity, (int) R.string.app_please_grant_phone_call_permission, Toast.LENGTH_LONG).show();
         ActivityCompat.requestPermissions(activity, new String[]{"android.permission.CALL_PHONE"}, 0);
         return hasPhoneCallPermission(activity, trace);
     }
@@ -70,7 +70,7 @@ public class PermissionChecker {
         if (Build.VERSION.SDK_INT < 23 || hasExternalStorageReadPermission(activity, trace)) {
             return true;
         }
-        Toast.makeText(activity, (int) R.string.app_please_grant_external_storage_read_permission, 1).show();
+        Toast.makeText(activity, (int) R.string.app_please_grant_external_storage_read_permission, Toast.LENGTH_LONG).show();
         ActivityCompat.requestPermissions(activity, new String[]{"android.permission.READ_EXTERNAL_STORAGE"}, 0);
         return hasExternalStorageReadPermission(activity, trace);
     }
@@ -92,7 +92,7 @@ public class PermissionChecker {
         if (Build.VERSION.SDK_INT < 23 || hasExternalStorageWritePermission(activity, trace)) {
             return true;
         }
-        Toast.makeText(activity, (int) R.string.app_please_grant_external_storage_write_permission, 1).show();
+        Toast.makeText(activity, (int) R.string.app_please_grant_external_storage_write_permission, Toast.LENGTH_LONG).show();
         ActivityCompat.requestPermissions(activity, new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"}, 0);
         return hasExternalStorageWritePermission(activity, trace);
     }
@@ -114,9 +114,9 @@ public class PermissionChecker {
         if (Build.VERSION.SDK_INT < 23 || hasDrawOverAppsPermission(activity, trace)) {
             return true;
         }
-        Toast.makeText(activity, (int) R.string.app_please_grant_draw_over_apps_permission, 1).show();
+        Toast.makeText(activity, (int) R.string.app_please_grant_draw_over_apps_permission, Toast.LENGTH_LONG).show();
         Intent intent = new Intent("android.settings.action.MANAGE_OVERLAY_PERMISSION", Uri.parse("package:" + activity.getPackageName()));
-        intent.addFlags(268435456);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivityForResult(intent, DRAW_OVER_APPS_REQUEST_CODE);
         return false;
     }
@@ -125,7 +125,7 @@ public class PermissionChecker {
     public boolean hasUsageStatsPermission(Context context, boolean trace) {
         boolean result = true;
         if (Build.VERSION.SDK_INT >= 23) {
-            result = ((AppOpsManager) context.getSystemService("appops")).checkOpNoThrow("android:get_usage_stats", Process.myUid(), context.getPackageName()) == 0;
+            result = ((AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE)).checkOpNoThrow("android:get_usage_stats", Process.myUid(), context.getPackageName()) == 0;
         }
         if (trace) {
             Log.d(TAG, "hasUsageStatsPermission(" + result + ")");
@@ -138,9 +138,9 @@ public class PermissionChecker {
         if (Build.VERSION.SDK_INT < 23 || hasUsageStatsPermission(activity, trace)) {
             return true;
         }
-        Toast.makeText(activity, (int) R.string.app_please_grant_usage_stats_permission, 1).show();
+        Toast.makeText(activity, (int) R.string.app_please_grant_usage_stats_permission, Toast.LENGTH_LONG).show();
         Intent intent = new Intent("android.settings.USAGE_ACCESS_SETTINGS");
-        intent.addFlags(268435456);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivityForResult(intent, USAGE_STATS_REQUEST_CODE);
         return false;
     }

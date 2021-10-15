@@ -26,7 +26,7 @@ public class Launcher {
     private static boolean DEBUG = false;
     private static final String TAG = "LMT::Launcher";
     private static Launcher instance = null;
-    private ActivityManager mActivityManager = ((ActivityManager) this.mContext.getSystemService("activity"));
+    private ActivityManager mActivityManager = ((ActivityManager) this.mContext.getSystemService(Context.ACTIVITY_SERVICE));
     private Context mContext;
     private List<ActivityManager.RecentTaskInfo> mRecentTaskInfo;
     private RootContext mRootContext = RootContext.getInstance(this.mContext);
@@ -190,7 +190,7 @@ public class Launcher {
         } else {
             Intent startMain = new Intent("android.intent.action.MAIN");
             startMain.addCategory("android.intent.category.HOME");
-            startMain.setFlags(268435456);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.mContext.startActivity(startMain);
         }
     }
@@ -258,7 +258,7 @@ public class Launcher {
             return;
         }
         Intent ni = new Intent("android.intent.action.SEARCH");
-        ni.addFlags(268435456);
+        ni.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             this.mContext.startActivity(ni);
         } catch (ActivityNotFoundException e) {
@@ -271,7 +271,7 @@ public class Launcher {
             Log.d(TAG, "doSearchLongpressAction()");
         }
         Intent ni = new Intent("android.intent.action.SEARCH_LONG_PRESS");
-        ni.addFlags(268435456);
+        ni.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             this.mContext.startActivity(ni);
         } catch (ActivityNotFoundException e) {
@@ -437,7 +437,7 @@ public class Launcher {
             if (!this.mRootContext.isRootAvailable(false)) {
                 Intent intent = new Intent("android.intent.action.MAIN", (Uri) null);
                 intent.setComponent(ComponentName.unflattenFromString(name));
-                intent.setFlags(268435456);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 this.mContext.startActivity(intent);
             } else if (Build.VERSION.SDK_INT >= 21) {
                 RootContext rootContext = this.mRootContext;
@@ -469,7 +469,7 @@ public class Launcher {
             }
         }
         Intent ni = new Intent("android.intent.action.VIEW");
-        ni.addFlags(268435456);
+        ni.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ni.setData(Uri.parse(page));
         try {
             this.mContext.startActivity(ni);
@@ -496,9 +496,9 @@ public class Launcher {
             Log.d(TAG, "doWifiToggleAction()");
         }
         if (Build.VERSION.SDK_INT < 29) {
-            WifiManager wfm = (WifiManager) this.mContext.getApplicationContext().getSystemService("wifi");
+            WifiManager wfm = (WifiManager) this.mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             wfm.setWifiEnabled(!wfm.isWifiEnabled());
-        } else if (((WifiManager) this.mContext.getApplicationContext().getSystemService("wifi")).isWifiEnabled()) {
+        } else if (((WifiManager) this.mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).isWifiEnabled()) {
             this.mRootContext.runCommandRoot("svc wifi disable", true);
         } else {
             this.mRootContext.runCommandRoot("svc wifi enable", true);
@@ -512,21 +512,21 @@ public class Launcher {
         boolean z = true;
         if (Build.VERSION.SDK_INT < 20) {
             try {
-                ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService("connectivity");
+                ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
                 Field iConnectivityManagerField = Class.forName(connectivityManager.getClass().getName()).getDeclaredField("mService");
                 iConnectivityManagerField.setAccessible(true);
                 Object iConnectivityManager = iConnectivityManagerField.get(connectivityManager);
                 Method setMobileDataEnabledMethod = Class.forName(iConnectivityManager.getClass().getName()).getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
                 setMobileDataEnabledMethod.setAccessible(true);
                 Object[] objArr = new Object[1];
-                if (((TelephonyManager) this.mContext.getSystemService("phone")).getDataState() == 2) {
+                if (((TelephonyManager) this.mContext.getSystemService(Context.TELEPHONY_SERVICE)).getDataState() == 2) {
                     z = false;
                 }
                 objArr[0] = Boolean.valueOf(z);
                 setMobileDataEnabledMethod.invoke(iConnectivityManager, objArr);
             } catch (Exception e) {
             }
-        } else if (((TelephonyManager) this.mContext.getSystemService("phone")).getDataState() == 2) {
+        } else if (((TelephonyManager) this.mContext.getSystemService(Context.TELEPHONY_SERVICE)).getDataState() == 2) {
             this.mRootContext.runCommandRoot("svc data disable", true);
         } else {
             this.mRootContext.runCommandRoot("svc data enable", true);
@@ -550,7 +550,7 @@ public class Launcher {
             Log.d(TAG, "doGPSToggleAction()");
         }
         Intent ni = new Intent("android.settings.LOCATION_SOURCE_SETTINGS");
-        ni.addFlags(268435456);
+        ni.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.mContext.startActivity(ni);
     }
 
@@ -678,7 +678,7 @@ public class Launcher {
         if (DEBUG) {
             Log.d(TAG, "doOpenKeyboard()");
         }
-        ((InputMethodManager) this.mContext.getSystemService("input_method")).toggleSoftInput(2, 1);
+        ((InputMethodManager) this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(2, 1);
     }
 
     private void doShortcutAction(String name) {
@@ -687,7 +687,7 @@ public class Launcher {
         }
         try {
             Intent shortcutIntent = Intent.parseUri(name, 0);
-            shortcutIntent.addFlags(268435456);
+            shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.mContext.startActivity(shortcutIntent);
         } catch (Exception e) {
         }

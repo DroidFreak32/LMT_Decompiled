@@ -41,7 +41,7 @@ public class RootContext {
             e.printStackTrace();
         }
         if (!this.mInitialized) {
-            Toast.makeText(context, "Failed to get root permissions!", 0).show();
+            Toast.makeText(context, "Failed to get root permissions!", Toast.LENGTH_SHORT).show();
             Log.e(TAG, "Failed to get root permissions!");
         }
     }
@@ -59,7 +59,7 @@ public class RootContext {
     /* access modifiers changed from: package-private */
     public boolean isRootAvailable(boolean trace) {
         if (trace && !this.mInitialized) {
-            Toast.makeText(this.mContext, "This feature needs root permissions!", 0).show();
+            Toast.makeText(this.mContext, "This feature needs root permissions!", Toast.LENGTH_SHORT).show();
             Log.e(TAG, "This feature needs root permissions!");
         }
         return this.mInitialized;

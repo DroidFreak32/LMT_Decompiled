@@ -40,7 +40,7 @@ abstract class ColorDialog extends AlertDialog.Builder implements DialogInterfac
     ColorDialog(Context context, String title, String[] colorSelectionStrings, String colorString) {
         super(context);
         setTitle(title);
-        View layout = ((LayoutInflater) context.getSystemService("layout_inflater")).inflate(R.layout.color, (ViewGroup) null);
+        View layout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.color, (ViewGroup) null);
         setView(layout);
         this.mAlphaLabel = (TextView) layout.findViewById(R.id.alpha_label);
         this.mAlphaValue = (TextView) layout.findViewById(R.id.alpha_value);
@@ -68,13 +68,13 @@ abstract class ColorDialog extends AlertDialog.Builder implements DialogInterfac
         this.mColorLast.setText("<");
         this.mColorLast.setOnClickListener(this);
         if (colorSelectionStrings.length == 1) {
-            this.mColorLast.setVisibility(4);
+            this.mColorLast.setVisibility(View.INVISIBLE);
         }
         this.mColorNext = (Button) layout.findViewById(R.id.color_next);
         this.mColorNext.setText(">");
         this.mColorNext.setOnClickListener(this);
         if (colorSelectionStrings.length == 1) {
-            this.mColorNext.setVisibility(4);
+            this.mColorNext.setVisibility(View.INVISIBLE);
         }
         this.mColorString = (EditText) layout.findViewById(R.id.color_string);
         this.mColorString.setText(colorString);
