@@ -133,7 +133,9 @@ public class PieFragment extends Fragment implements AdapterView.OnItemClickList
                 /* access modifiers changed from: protected */
                 @Override // com.noname81.lmt.AsyncDrawableTask
                 public Drawable doInBackground(Void... params) {
-                    return IconUtils.getIconForAction(PieFragment.this.getActivity(), SettingsValues.getInstance(PieFragment.this.getActivity()).getPieAction(CommandSimpleAdapter.this.mOffset + position), IconUtils.getNamePie(CommandSimpleAdapter.this.mOffset + position));
+                    return IconUtils.getIconForAction(PieFragment.this.getActivity(),
+                            SettingsValues.getInstance(PieFragment.this.getActivity()).getPieAction(CommandSimpleAdapter.this.mOffset + position),
+                            IconUtils.getNamePie(CommandSimpleAdapter.this.mOffset + position));
                 }
             }.execute(new Void[0]);
 //TODO            icon2.setOnClickListener(new View.OnClickListener(this.mOffset + position) {

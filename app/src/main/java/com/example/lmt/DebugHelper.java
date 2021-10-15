@@ -21,7 +21,8 @@ class DebugHelper {
 
     /* access modifiers changed from: package-private */
     public void showDebugMenu(final Context context) {
-        new InputDialog(context.getString(R.string.dialog_set_debug_mode), new String[]{context.getString(R.string.dialog_none), context.getString(R.string.dialog_launcher_debug), context.getString(R.string.dialog_touch_service_debug), context.getString(R.string.dialog_pie_service_debug), context.getString(R.string.dialog_no_root)}, Integer.toString(0), context) {
+//        new InputDialog(context.getString(R.string.dialog_set_debug_mode), new String[]{context.getString(R.string.dialog_none), context.getString(R.string.dialog_launcher_debug), context.getString(R.string.dialog_touch_service_debug), context.getString(R.string.dialog_pie_service_debug), context.getString(R.string.dialog_no_root)}, Integer.toString(0), context) {
+        new InputDialog(context, context.getString(R.string.dialog_set_debug_mode), new String[]{context.getString(R.string.dialog_none), context.getString(R.string.dialog_launcher_debug), context.getString(R.string.dialog_touch_service_debug), context.getString(R.string.dialog_pie_service_debug), context.getString(R.string.dialog_no_root)}, Integer.toString(0)) {
             /* class com.noname81.lmt.DebugHelper.AlertDialog$BuilderC05151 */
 
             @Override // com.noname81.lmt.InputDialog

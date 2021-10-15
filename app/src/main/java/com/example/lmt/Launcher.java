@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.support.v7.widget.ActivityChooserView;
+//import androidx.appcompat.widget.ActivityChooserView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
@@ -288,9 +289,11 @@ public class Launcher {
             return;
         }
         this.mRecentTaskInfo = this.mActivityManager.getRecentTasks(20, 0);
-        int nextID = ActivityChooserView.ActivityChooserViewAdapter.MAX_ACTIVITY_COUNT_UNLIMITED;
+//        int nextID = ActivityChooserView.ActivityChooserViewAdapter.MAX_ACTIVITY_COUNT_UNLIMITED;
+        int nextID = Integer.MAX_VALUE;
         int nextPos = 0;
-        int firstID = ActivityChooserView.ActivityChooserViewAdapter.MAX_ACTIVITY_COUNT_UNLIMITED;
+//        int firstID = ActivityChooserView.ActivityChooserViewAdapter.MAX_ACTIVITY_COUNT_UNLIMITED;
+        int firstID = Integer.MAX_VALUE;
         int firstPos = 0;
         for (int i = 1; i < this.mRecentTaskInfo.size(); i++) {
             if (this.mRecentTaskInfo.get(i).id < nextID && this.mRecentTaskInfo.get(i).id > this.mRecentTaskInfo.get(0).id && !this.mRecentTaskInfo.get(i).baseIntent.hasCategory("android.intent.category.HOME")) {

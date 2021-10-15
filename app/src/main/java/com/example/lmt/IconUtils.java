@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.ImageView;
 import java.io.ByteArrayOutputStream;
@@ -48,12 +50,15 @@ public class IconUtils {
 
     static Drawable resizeImage(Context context, Drawable image, int size) {
         Resources res = context.getResources();
+
         boolean noFilter = size == 1;
         if (size > 0 && size <= 2) {
             size = (int) TypedValue.applyDimension(1, 35.0f, res.getDisplayMetrics());
         }
         if (size > 0) {
-            BitmapDrawable bd = new BitmapDrawable(res, Bitmap.createScaledBitmap(getBitmapFromDrawable(image), size, size, true));
+            Log.e("LMT", "\n\n\n\n\nBITMAP WIDTH!!!" + image.getClass());
+            Bitmap bitmapimage = Bitmap.createScaledBitmap(getBitmapFromDrawable(image), size, size, true);
+            BitmapDrawable bd = new BitmapDrawable(res, bitmapimage);
             if (noFilter) {
                 bd.setChangingConfigurations(ActivityInfo.CONFIG_MCC);
             }

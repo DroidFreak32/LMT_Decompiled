@@ -161,7 +161,7 @@ public class Action {
         }
         Drawable drawable = this.mIcon;
         if (drawable != null) {
-            return IconUtils.resizeImage(context, drawable, appImageScaling);
+            return IconUtils.resizeImage(context, (Drawable) drawable, appImageScaling);
         }
         if (this.mType == 2 && appImageScaling > 0) {
             try {
