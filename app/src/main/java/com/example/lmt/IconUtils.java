@@ -21,8 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-/* access modifiers changed from: package-private */
-public class IconUtils {
+class IconUtils {
     IconUtils() {
     }
 

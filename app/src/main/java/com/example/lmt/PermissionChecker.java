@@ -13,8 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-/* access modifiers changed from: package-private */
-public class PermissionChecker {
+class PermissionChecker {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     static int DRAW_OVER_APPS_REQUEST_CODE = 5469;
     private static final String TAG = "LMT::PermissionChecker";
@@ -31,8 +30,7 @@ public class PermissionChecker {
         return instance;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean hasPhoneCallPermission(Context context, boolean trace) {
+    boolean hasPhoneCallPermission(Context context, boolean trace) {
         boolean result = true;
         if (Build.VERSION.SDK_INT >= 23) {
             result = ContextCompat.checkSelfPermission(context, "android.permission.CALL_PHONE") == 0;
@@ -43,8 +41,7 @@ public class PermissionChecker {
         return result;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean checkAndRequestPhoneCallPermission(Activity activity, boolean trace) {
+    boolean checkAndRequestPhoneCallPermission(Activity activity, boolean trace) {
         if (Build.VERSION.SDK_INT < 23 || hasPhoneCallPermission(activity, trace)) {
             return true;
         }
@@ -53,8 +50,7 @@ public class PermissionChecker {
         return hasPhoneCallPermission(activity, trace);
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean hasExternalStorageReadPermission(Context context, boolean trace) {
+    boolean hasExternalStorageReadPermission(Context context, boolean trace) {
         boolean result = true;
         if (Build.VERSION.SDK_INT >= 23) {
             result = ContextCompat.checkSelfPermission(context, "android.permission.READ_EXTERNAL_STORAGE") == 0;
@@ -65,8 +61,7 @@ public class PermissionChecker {
         return result;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean checkAndRequestExternalStorageReadPermission(Activity activity, boolean trace) {
+    boolean checkAndRequestExternalStorageReadPermission(Activity activity, boolean trace) {
         if (Build.VERSION.SDK_INT < 23 || hasExternalStorageReadPermission(activity, trace)) {
             return true;
         }
@@ -75,8 +70,7 @@ public class PermissionChecker {
         return hasExternalStorageReadPermission(activity, trace);
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean hasExternalStorageWritePermission(Context context, boolean trace) {
+    boolean hasExternalStorageWritePermission(Context context, boolean trace) {
         boolean result = true;
         if (Build.VERSION.SDK_INT >= 23) {
             result = ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE") == 0;
@@ -87,8 +81,7 @@ public class PermissionChecker {
         return result;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean checkAndRequestExternalStorageWritePermission(Activity activity, boolean trace) {
+    boolean checkAndRequestExternalStorageWritePermission(Activity activity, boolean trace) {
         if (Build.VERSION.SDK_INT < 23 || hasExternalStorageWritePermission(activity, trace)) {
             return true;
         }
@@ -97,8 +90,7 @@ public class PermissionChecker {
         return hasExternalStorageWritePermission(activity, trace);
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean hasDrawOverAppsPermission(Context context, boolean trace) {
+    boolean hasDrawOverAppsPermission(Context context, boolean trace) {
         boolean result = true;
         if (Build.VERSION.SDK_INT >= 23 && !Settings.canDrawOverlays(context)) {
             result = false;
@@ -109,8 +101,7 @@ public class PermissionChecker {
         return result;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean checkAndRequestDrawOverAppsPermission(Activity activity, boolean trace) {
+    boolean checkAndRequestDrawOverAppsPermission(Activity activity, boolean trace) {
         if (Build.VERSION.SDK_INT < 23 || hasDrawOverAppsPermission(activity, trace)) {
             return true;
         }
@@ -121,8 +112,7 @@ public class PermissionChecker {
         return false;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean hasUsageStatsPermission(Context context, boolean trace) {
+    boolean hasUsageStatsPermission(Context context, boolean trace) {
         boolean result = true;
         if (Build.VERSION.SDK_INT >= 23) {
             result = ((AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE)).checkOpNoThrow("android:get_usage_stats", Process.myUid(), context.getPackageName()) == 0;
@@ -133,8 +123,7 @@ public class PermissionChecker {
         return result;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean checkAndRequestUsageStatsPermission(Activity activity, boolean trace) {
+    boolean checkAndRequestUsageStatsPermission(Activity activity, boolean trace) {
         if (Build.VERSION.SDK_INT < 23 || hasUsageStatsPermission(activity, trace)) {
             return true;
         }

@@ -8,8 +8,7 @@ import android.os.Build;
 import android.util.Log;
 import java.io.File;
 
-/* access modifiers changed from: package-private */
-public class Action {
+class Action {
     static final int Activity = 27;
     static final int Apex = 41;
     static final int App = 2;
@@ -85,8 +84,7 @@ public class Action {
         this.mIcon = IconUtils.convertBase64StringToDrawable(context, icon);
     }
 
-    /* access modifiers changed from: package-private */
-    public int getType() {
+    int getType() {
         return this.mType;
     }
 
@@ -131,8 +129,7 @@ public class Action {
         return "type: " + type + ", string: " + string;
     }
 
-    /* access modifiers changed from: package-private */
-    public Drawable getDrawable(Context context, String namePie, int userImageScaling, int appImageScaling, boolean noneActionImage) {
+    Drawable getDrawable(Context context, String namePie, int userImageScaling, int appImageScaling, boolean noneActionImage) {
         if (this.mType == 1 && !noneActionImage) {
             return null;
         }
@@ -193,8 +190,7 @@ public class Action {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void checkNeededPermissions(Activity activity, boolean request) {
+    void checkNeededPermissions(Activity activity, boolean request) {
         switch (getType()) {
             case 2:
             case 3:

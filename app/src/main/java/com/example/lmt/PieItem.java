@@ -7,8 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
-/* access modifiers changed from: package-private */
-public class PieItem {
+class PieItem {
     private float animate;
     private int inner;
     private int level;
@@ -27,8 +26,7 @@ public class PieItem {
         this.level = level2;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setColor(int color) {
+    void setColor(int color) {
         if (color != this.mColor) {
             if (color != 0) {
                 Drawable drawable = this.mDrawableShort;
@@ -53,8 +51,7 @@ public class PieItem {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void setSelected(boolean s) {
+    void setSelected(boolean s) {
         this.mSelected = s;
         View view = this.mView;
         if (view != null) {
@@ -62,28 +59,23 @@ public class PieItem {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void setAnimationAngle(float a) {
+    void setAnimationAngle(float a) {
         this.animate = a;
     }
 
-    /* access modifiers changed from: package-private */
-    public float getAnimationAngle() {
+    float getAnimationAngle() {
         return this.animate;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean isSelected() {
+    boolean isSelected() {
         return this.mSelected;
     }
 
-    /* access modifiers changed from: package-private */
-    public int getLevel() {
+    int getLevel() {
         return this.level;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setGeometry(float st, float sw, int inside, int outside, Path p) {
+    void setGeometry(float st, float sw, int inside, int outside, Path p) {
         this.start = st;
         this.sweep = sw;
         this.inner = inside;
@@ -91,49 +83,40 @@ public class PieItem {
         this.mPath = p;
     }
 
-    /* access modifiers changed from: package-private */
-    public float getStart() {
+    float getStart() {
         return this.start;
     }
 
-    /* access modifiers changed from: package-private */
-    public float getStartAngle() {
+    float getStartAngle() {
         return this.start + this.animate;
     }
 
-    /* access modifiers changed from: package-private */
-    public float getSweep() {
+    float getSweep() {
         return this.sweep;
     }
 
-    /* access modifiers changed from: package-private */
-    public int getInnerRadius() {
+    int getInnerRadius() {
         return this.inner;
     }
 
-    /* access modifiers changed from: package-private */
-    public int getOuterRadius() {
+    int getOuterRadius() {
         return this.outer;
     }
 
-    /* access modifiers changed from: package-private */
-    public View getView() {
+    View getView() {
         return this.mView;
     }
 
-    /* access modifiers changed from: package-private */
-    public Path getPath() {
+    Path getPath() {
         return this.mPath;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setDrawables(Drawable drawableShort, Drawable drawableLong) {
+    void setDrawables(Drawable drawableShort, Drawable drawableLong) {
         this.mDrawableShort = drawableShort;
         this.mDrawableLong = drawableLong;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setAlpha(int alpha) {
+    void setAlpha(int alpha) {
         Drawable drawable = this.mDrawableShort;
         if (drawable != null) {
             drawable.setAlpha(alpha);
@@ -144,8 +127,7 @@ public class PieItem {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void selectImage(int index) {
+    void selectImage(int index) {
         Drawable drawable;
         ImageView imageView = (ImageView) this.mView;
         if (index != 0 || (drawable = this.mDrawableShort) == null) {

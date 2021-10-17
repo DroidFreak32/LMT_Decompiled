@@ -47,68 +47,55 @@ public class TouchServiceResult {
         return String.format("Gesture: %s\nScore: %.2f percent\nStartX: %.2f\nStartY: %.2f", this.name, Float.valueOf(this.score * 100.0f), Float.valueOf(this.startX), Float.valueOf(this.startY));
     }
 
-    /* access modifiers changed from: package-private */
-    public String toDebugString() {
+    String toDebugString() {
         return String.format("Gesture: %s, score: %.2f, startX: %.2f, startY: %.2f", this.name, Float.valueOf(this.score * 100.0f), Float.valueOf(this.startX), Float.valueOf(this.startY));
     }
 
-    /* access modifiers changed from: package-private */
-    public int getGesture() {
+    int getGesture() {
         return this.gesture;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setGesture(int gesture2) {
+    void setGesture(int gesture2) {
         this.gesture = gesture2;
     }
 
-    /* access modifiers changed from: package-private */
-    public String getName() {
+    String getName() {
         return this.name;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setName(String name2) {
+    void setName(String name2) {
         this.name = name2;
     }
 
-    /* access modifiers changed from: package-private */
-    public float getScore() {
+    float getScore() {
         return this.score;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setScore(float score2) {
+    void setScore(float score2) {
         this.score = score2;
     }
 
-    /* access modifiers changed from: package-private */
-    public int getOverlayID() {
+    int getOverlayID() {
         return this.overlayID;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setOverlayID(int overlayID2) {
+    void setOverlayID(int overlayID2) {
         this.overlayID = overlayID2;
     }
 
-    /* access modifiers changed from: package-private */
-    public float getStartX() {
+    float getStartX() {
         return this.startX;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setStartX(float startX2) {
+    void setStartX(float startX2) {
         this.startX = startX2;
     }
 
-    /* access modifiers changed from: package-private */
-    public float getStartY() {
+    float getStartY() {
         return this.startY;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setStartY(float startY2) {
+    void setStartY(float startY2) {
         this.startY = startY2;
     }
 }

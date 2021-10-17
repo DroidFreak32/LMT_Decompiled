@@ -11,8 +11,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/* access modifiers changed from: package-private */
-public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
+class SettingsValuesBase extends SettingsSharedPrefsWrapper {
     static final String path = "/Android/data/com.noname81.lmt/files/";
     ActivityManager mActivityManager = ((ActivityManager) this.mContext.getSystemService(Context.ACTIVITY_SERVICE));
     ArrayList<String> mBlacklist = new ArrayList<>();
@@ -36,13 +35,11 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         loadBlacklistPie();
     }
 
-    /* access modifiers changed from: package-private */
-    public int getServiceState() {
+    int getServiceState() {
         return this.mServiceState;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setServiceState(int state) {
+    void setServiceState(int state) {
         this.mServiceState = state;
     }
 
@@ -50,8 +47,7 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         return false;
     }
 
-    /* access modifiers changed from: package-private */
-    public void startService() {
+    void startService() {
         if (Build.VERSION.SDK_INT >= 26) {
             this.mContext.startForegroundService(new Intent(this.mContext, TouchService.class));
         } else {
@@ -59,45 +55,39 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void stopService() {
+    void stopService() {
         this.mContext.stopService(new Intent(this.mContext, TouchService.class));
     }
 
-    /* access modifiers changed from: package-private */
-    public void restartServiceIfRequired() {
+    void restartServiceIfRequired() {
         if (this.mServiceState > 0) {
             stopService();
             startService();
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public Action getGestureAction(int gesture) {
+    Action getGestureAction(int gesture) {
         if (gesture < this.mGestureActions.size()) {
             return this.mGestureActions.get(gesture);
         }
         return new Action(1);
     }
 
-    /* access modifiers changed from: package-private */
-    public Action getPieAction(int pie) {
+    Action getPieAction(int pie) {
         if (pie < this.mPieActions.size()) {
             return this.mPieActions.get(pie);
         }
         return new Action(1);
     }
 
-    /* access modifiers changed from: package-private */
-    public Action getIsaAction(int isa) {
+    Action getIsaAction(int isa) {
         if (isa < this.mIsaActions.size()) {
             return this.mIsaActions.get(isa);
         }
         return new Action(1);
     }
 
-    /* access modifiers changed from: package-private */
-    public Action getCurrentAction() {
+    Action getCurrentAction() {
         int i = this.mCurrentGesture;
         if (i >= 0) {
             return this.mGestureActions.get(i);
@@ -113,29 +103,25 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         return new Action(-1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void setCurrentGesture(int currentGesture) {
+    void setCurrentGesture(int currentGesture) {
         this.mCurrentGesture = currentGesture;
         this.mCurrentPie = -1;
         this.mCurrentIsa = -1;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setCurrentPie(int currentPie) {
+    void setCurrentPie(int currentPie) {
         this.mCurrentGesture = -1;
         this.mCurrentPie = currentPie;
         this.mCurrentIsa = -1;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setCurrentIsa(int currentIsa) {
+    void setCurrentIsa(int currentIsa) {
         this.mCurrentGesture = -1;
         this.mCurrentPie = -1;
         this.mCurrentIsa = currentIsa;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setCurrentAction(Activity activity, Action action) {
+    void setCurrentAction(Activity activity, Action action) {
         SharedPreferences.Editor editor = createAndReturnSharedPreferencesEditor();
         int i = this.mCurrentGesture;
         if (i >= 0) {
@@ -210,59 +196,48 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         saveString("IsaItem" + isa + " Icon", IconUtils.convertDrawableToBase64String(action.getIcon()), editor);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadFeedbackMode() {
+    int loadFeedbackMode() {
         return loadInt("Feedback", 3);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveFeedbackMode(int feedback) {
+    void saveFeedbackMode(int feedback) {
         saveInt("Feedback", feedback, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadGestureVibrationTime() {
+    int loadGestureVibrationTime() {
         return loadInt("Vibration", 30);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveGestureVibrationTime(int vibration) {
+    void saveGestureVibrationTime(int vibration) {
         saveInt("Vibration", vibration, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieVibrationTime() {
+    int loadPieVibrationTime() {
         return loadInt("PieVibration", 30);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieVibrationTime(int vibration) {
+    void savePieVibrationTime(int vibration) {
         saveInt("PieVibration", vibration, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadInputDevice() {
+    int loadInputDevice() {
         return loadInt("Input", 4);
     }
 
-    /* access modifiers changed from: package-private */
-    public String loadInputDeviceString() {
+    String loadInputDeviceString() {
         int inputDevice = loadInt("Input", 4);
         return "/dev/input/event" + inputDevice;
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveInputDevice(int inputDevice) {
+    void saveInputDevice(int inputDevice) {
         saveInt("Input", inputDevice, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public String loadResourceSearchPath() {
+    String loadResourceSearchPath() {
         return loadString("ResourceSearchPath", Environment.getExternalStorageDirectory().getPath() + path);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveResourceSearchPath(String resourceSearchPatch) {
+    void saveResourceSearchPath(String resourceSearchPatch) {
         if (resourceSearchPatch == null || resourceSearchPatch.length() == 0) {
             resourceSearchPatch = Environment.getExternalStorageDirectory().getPath() + path;
         }
@@ -272,89 +247,73 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         saveString("ResourceSearchPath", resourceSearchPatch, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadSingleTouchGestureSupport() {
+    int loadSingleTouchGestureSupport() {
         return loadInt("STSupport", 1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveSingleTouchGestureSupport(int support) {
+    void saveSingleTouchGestureSupport(int support) {
         saveInt("STSupport", support, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadSingleSwipesBBox() {
+    int loadSingleSwipesBBox() {
         return loadInt("SingleSwipesBBox", 1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveSingleSwipesBBox(int bbox) {
+    void saveSingleSwipesBBox(int bbox) {
         saveInt("SingleSwipesBBox", bbox, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadSingleSwipesAArea() {
+    int loadSingleSwipesAArea() {
         this.mSingleSwipesAArea = loadInt("SingleSwipesAArea", 60);
         return this.mSingleSwipesAArea;
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveSingleSwipesAArea(int area) {
+    void saveSingleSwipesAArea(int area) {
         saveInt("SingleSwipesAArea", area, null);
         this.mSingleSwipesAArea = area;
     }
 
-    /* access modifiers changed from: package-private */
-    public float loadTouchscreenScreenFactorX() {
+    float loadTouchscreenScreenFactorX() {
         this.mTouchscreenScreenFactorX = ((float) loadInt("TouchscreenScreenFactorX", 100)) / 100.0f;
         return this.mTouchscreenScreenFactorX;
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveTouchscreenScreenFactorX(int factor) {
+    void saveTouchscreenScreenFactorX(int factor) {
         saveInt("TouchscreenScreenFactorX", factor, null);
         this.mTouchscreenScreenFactorX = ((float) factor) / 100.0f;
     }
 
-    /* access modifiers changed from: package-private */
-    public float loadTouchscreenScreenFactorY() {
+    float loadTouchscreenScreenFactorY() {
         this.mTouchscreenScreenFactorY = ((float) loadInt("TouchscreenScreenFactorY", 100)) / 100.0f;
         return this.mTouchscreenScreenFactorY;
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveTouchscreenScreenFactorY(int factor) {
+    void saveTouchscreenScreenFactorY(int factor) {
         saveInt("TouchscreenScreenFactorY", factor, null);
         this.mTouchscreenScreenFactorY = ((float) factor) / 100.0f;
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadMinScore() {
+    int loadMinScore() {
         return loadInt("MinScore", 70);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveMinScore(int score) {
+    void saveMinScore(int score) {
         saveInt("MinScore", score, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadMinPathLength() {
+    int loadMinPathLength() {
         return loadInt("MinPathLength", 7);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveMinPathLength(int length) {
+    void saveMinPathLength(int length) {
         saveInt("MinPathLength", length, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadAutostart() {
+    int loadAutostart() {
         return loadInt("Autostart", 1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveAutostart(int autostart) {
+    void saveAutostart(int autostart) {
         saveInt("Autostart", autostart, null);
     }
 
@@ -400,247 +359,199 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         saveString("BlacklistPie", blacklistString.toString(), null);
     }
 
-    /* access modifiers changed from: package-private */
-    public void setBlacklisted(String name) {
+    void setBlacklisted(String name) {
         this.mBlacklist.add(name);
         saveBlacklist();
     }
 
-    /* access modifiers changed from: package-private */
-    public void setBlacklistedPie(String name) {
+    void setBlacklistedPie(String name) {
         this.mBlacklistPie.add(name);
         saveBlacklistPie();
     }
 
-    /* access modifiers changed from: package-private */
-    public void clearBlacklisted() {
+    void clearBlacklisted() {
         this.mBlacklist.clear();
         saveBlacklist();
     }
 
-    /* access modifiers changed from: package-private */
-    public void clearBlacklistedPie() {
+    void clearBlacklistedPie() {
         this.mBlacklistPie.clear();
         saveBlacklistPie();
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadTouchServiceMode() {
+    int loadTouchServiceMode() {
         return loadInt("TSMode", 2);
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveTouchServiceMode(int mode) {
+    void saveTouchServiceMode(int mode) {
         saveInt("TSMode", mode, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPiePos() {
+    int loadPiePos() {
         return loadInt("PiePos", 7);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePiePos(int mode) {
+    void savePiePos(int mode) {
         saveInt("PiePos", mode, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieAreaX() {
+    int loadPieAreaX() {
         return loadInt("PieAreaX", 50);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieAreaX(int mode) {
+    void savePieAreaX(int mode) {
         saveInt("PieAreaX", mode, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieAreaY() {
+    int loadPieAreaY() {
         return loadInt("PieAreaY", getIsSmallScreen() ? 300 : 600);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieAreaY(int mode) {
+    void savePieAreaY(int mode) {
         saveInt("PieAreaY", mode, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieAreaGravity() {
+    int loadPieAreaGravity() {
         return loadInt("PieAreaGravity", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieAreaGravity(int mode) {
+    void savePieAreaGravity(int mode) {
         saveInt("PieAreaGravity", mode, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public String loadPieColor() {
+    String loadPieColor() {
         return loadString("PieColorString", "0");
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieColor(String colors) {
+    void savePieColor(String colors) {
         saveString("PieColorString", colors, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public String loadPieStatusInfoColor() {
+    String loadPieStatusInfoColor() {
         return loadString("PieStatusInfoColorString", "0");
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieStatusInfoColor(String colors) {
+    void savePieStatusInfoColor(String colors) {
         saveString("PieStatusInfoColorString", colors, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public String loadPiePointerColor() {
+    String loadPiePointerColor() {
         return loadString("PiePointerColorString", "0");
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePiePointerColor(String colors) {
+    void savePiePointerColor(String colors) {
         saveString("PiePointerColorString", colors, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieFont() {
+    int loadPieFont() {
         return loadInt("PieFont", getIsSmallScreen() ? 3 : 4);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieFont(int font) {
+    void savePieFont(int font) {
         saveInt("PieFont", font, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieInnerRadius() {
+    int loadPieInnerRadius() {
         return loadInt("PieInnerRadius", getIsSmallScreen() ? 40 : 60);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieInnerRadius(int value) {
+    void savePieInnerRadius(int value) {
         saveInt("PieInnerRadius", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieOuterRadius() {
+    int loadPieOuterRadius() {
         return loadInt("PieOuterRadius", getIsSmallScreen() ? 60 : 80);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieOuterRadius(int value) {
+    void savePieOuterRadius(int value) {
         saveInt("PieOuterRadius", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieShiftSize() {
+    int loadPieShiftSize() {
         return loadInt("PieShiftSize", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieShiftSize(int value) {
+    void savePieShiftSize(int value) {
         saveInt("PieShiftSize", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieOutlineSize() {
+    int loadPieOutlineSize() {
         return loadInt("PieOutlineSize", 3);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieOutlineSize(int value) {
+    void savePieOutlineSize(int value) {
         saveInt("PieOutlineSize", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieSliceGap() {
+    int loadPieSliceGap() {
         return loadInt("PieSliceGap", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieSliceGap(int value) {
+    void savePieSliceGap(int value) {
         saveInt("PieSliceGap", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieStartGap() {
+    int loadPieStartGap() {
         return loadInt("PieStartGap", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieStartGap(int value) {
+    void savePieStartGap(int value) {
         saveInt("PieStartGap", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieRotateImages() {
+    int loadPieRotateImages() {
         return loadInt("PieRotateImages", 1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieRotateImages(int value) {
+    void savePieRotateImages(int value) {
         saveInt("PieRotateImages", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieLongpress() {
+    int loadPieLongpress() {
         return loadInt("PieLongpress", 500);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieLongpress(int time) {
+    void savePieLongpress(int time) {
         saveInt("PieLongpress", time, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieAnimation() {
+    int loadPieAnimation() {
         return loadInt("PieAnimation", 80);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieAnimation(int time) {
+    void savePieAnimation(int time) {
         saveInt("PieAnimation", time, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieVibrate() {
+    int loadPieVibrate() {
         return loadInt("PieVibrate", 1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieVibrate(int value) {
+    void savePieVibrate(int value) {
         saveInt("PieVibrate", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieMultiCommand() {
+    int loadPieMultiCommand() {
         return loadInt("PieMultiCommand", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieMultiCommand(int value) {
+    void savePieMultiCommand(int value) {
         saveInt("PieMultiCommand", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPiePointerFromEdges() {
+    int loadPiePointerFromEdges() {
         return loadInt("PiePointerFromEdges", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePiePointerFromEdges(int value) {
+    void savePiePointerFromEdges(int value) {
         saveInt("PiePointerFromEdges", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPiePointerWarpFactor() {
+    int loadPiePointerWarpFactor() {
         return loadInt("PiePointerWarpFactorPercent", 300);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePiePointerWarpFactor(int value) {
+    void savePiePointerWarpFactor(int value) {
         if (value < 200) {
             value = ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION;
         }
@@ -650,73 +561,59 @@ public class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         saveInt("PiePointerWarpFactorPercent", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieShowStatusInfos() {
+    int loadPieShowStatusInfos() {
         return loadInt("PieShowStatusInfos", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieShowStatusInfos(int value) {
+    void savePieShowStatusInfos(int value) {
         saveInt("PieShowStatusInfos", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieShowScaleAppImages() {
+    int loadPieShowScaleAppImages() {
         return loadInt("PieShowAppImages", 1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieShowScaleAppImages(int value) {
+    void savePieShowScaleAppImages(int value) {
         saveInt("PieShowAppImages", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieShowScaleUserImages() {
+    int loadPieShowScaleUserImages() {
         return loadInt("PieUserImageScaling", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieShowScaleUserImages(int value) {
+    void savePieShowScaleUserImages(int value) {
         saveInt("PieUserImageScaling", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieNavButtonStyle() {
+    int loadPieNavButtonStyle() {
         return loadInt("NavButtonStyle", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieNavButtonsStyle(int value) {
+    void savePieNavButtonsStyle(int value) {
         saveInt("NavButtonStyle", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieExpandTriggerArea() {
+    int loadPieExpandTriggerArea() {
         return loadInt("PieExpandTriggerArea", 1);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieExpandTriggerArea(int value) {
+    void savePieExpandTriggerArea(int value) {
         saveInt("PieExpandTriggerArea", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieAreaBehindKeyboard() {
+    int loadPieAreaBehindKeyboard() {
         return loadInt("PieBehindKeyboard", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieAreaBehindKeyboard(int value) {
+    void savePieAreaBehindKeyboard(int value) {
         saveInt("PieBehindKeyboard", value, null);
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadPieOnLockScreen() {
+    int loadPieOnLockScreen() {
         return loadInt("PieOnLockScreen", 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public void savePieOnLockScreen(int value) {
+    void savePieOnLockScreen(int value) {
         saveInt("PieOnLockScreen", value, null);
     }
 }

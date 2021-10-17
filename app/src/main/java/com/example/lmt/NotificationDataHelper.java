@@ -36,8 +36,7 @@ class NotificationDataHelper {
         return instance;
     }
 
-    /* access modifiers changed from: package-private */
-    public void addNotificationData(String name, long time, String text, PendingIntent startIntent, PendingIntent deleteIntent, Drawable icon) {
+    void addNotificationData(String name, long time, String text, PendingIntent startIntent, PendingIntent deleteIntent, Drawable icon) {
         int i = 0;
         while (i < this.mNotificationList.size()) {
             if (this.mNotificationList.get(i) != null && this.mNotificationList.get(i).mName != null) {
@@ -57,45 +56,39 @@ class NotificationDataHelper {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public int getNotificationDataSize() {
+    int getNotificationDataSize() {
         return this.mNotificationList.size();
     }
 
-    /* access modifiers changed from: package-private */
-    public String getNotificationDataName(int index) {
+    String getNotificationDataName(int index) {
         if (index < 0 || index >= this.mNotificationList.size()) {
             return BuildConfig.FLAVOR;
         }
         return this.mNotificationList.get(index).mName;
     }
 
-    /* access modifiers changed from: package-private */
-    public long getNotificationDataTime(int index) {
+    long getNotificationDataTime(int index) {
         if (index < 0 || index >= this.mNotificationList.size()) {
             return 0;
         }
         return this.mNotificationList.get(index).mTime;
     }
 
-    /* access modifiers changed from: package-private */
-    public PendingIntent getNotificationDataStartIntent(int index) {
+    PendingIntent getNotificationDataStartIntent(int index) {
         if (index < 0 || index >= this.mNotificationList.size()) {
             return null;
         }
         return this.mNotificationList.get(index).mStartIntent;
     }
 
-    /* access modifiers changed from: package-private */
-    public String getNotificationDataText(int index) {
+    String getNotificationDataText(int index) {
         if (index < 0 || index >= this.mNotificationList.size()) {
             return BuildConfig.FLAVOR;
         }
         return this.mNotificationList.get(index).mText;
     }
 
-    /* access modifiers changed from: package-private */
-    public void removeNotificationData(int index) {
+    void removeNotificationData(int index) {
         if (index >= 0 && index < this.mNotificationList.size()) {
             try {
                 if (this.mNotificationList.get(index).mDeleteIntent != null) {

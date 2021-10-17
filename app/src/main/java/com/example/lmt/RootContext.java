@@ -56,8 +56,7 @@ public class RootContext {
         return instance;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean isRootAvailable(boolean trace) {
+    boolean isRootAvailable(boolean trace) {
         if (trace && !this.mInitialized) {
             Toast.makeText(this.mContext, "This feature needs root permissions!", Toast.LENGTH_SHORT).show();
             Log.e(TAG, "This feature needs root permissions!");
@@ -65,8 +64,7 @@ public class RootContext {
         return this.mInitialized;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setDebug(int value) {
+    void setDebug(int value) {
         boolean z = true;
         if (value != 1) {
             z = false;
@@ -74,8 +72,7 @@ public class RootContext {
         DEBUG = z;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setInitialized(boolean enabled) {
+    void setInitialized(boolean enabled) {
         this.mInitialized = enabled;
     }
 
@@ -206,8 +203,7 @@ public class RootContext {
         this.mRootInputStream = new DataInputStream(this.mRootProcess.getInputStream());
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean runCommandRemote(String cmd, boolean trace) {
+    boolean runCommandRemote(String cmd, boolean trace) {
         if (DEBUG) {
             Log.d(TAG, "runCommandRemote(" + cmd + ")");
         }
@@ -238,8 +234,7 @@ public class RootContext {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public String runCommandRemoteResult(String cmd, boolean trace) {
+    String runCommandRemoteResult(String cmd, boolean trace) {
         if (!runCommandRemote(cmd, trace)) {
             return null;
         }
@@ -281,8 +276,7 @@ public class RootContext {
         return result;
     }
 
-    /* access modifiers changed from: package-private */
-    public void runCommandRoot(String cmd, boolean trace) {
+    void runCommandRoot(String cmd, boolean trace) {
         DataOutputStream dataOutputStream;
         if (DEBUG) {
             Log.d(TAG, "runCommandRoot(" + cmd + ")");
@@ -302,8 +296,7 @@ public class RootContext {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public String runCommandResult(String cmd, boolean root) {
+    String runCommandResult(String cmd, boolean root) {
         if (DEBUG) {
             Log.d(TAG, "runCommandResult(" + cmd + ", " + root + ")");
         }

@@ -14,8 +14,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-/* access modifiers changed from: package-private */
-public class SettingsValues extends SettingsValuesBase {
+class SettingsValues extends SettingsValuesBase {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static SettingsValues instance = null;
     private int mOrientation;
@@ -34,13 +33,11 @@ public class SettingsValues extends SettingsValuesBase {
         return instance;
     }
 
-    /* access modifiers changed from: package-private */
-    public String getVersion() {
+    String getVersion() {
         return "v3.1";
     }
 
-    /* access modifiers changed from: package-private */
-    public long getDays() {
+    long getDays() {
         long delta = 1641771032000L - System.currentTimeMillis();
         if (delta > 0) {
             return (((delta / 1000) / 60) / 60) / 24;
@@ -48,23 +45,19 @@ public class SettingsValues extends SettingsValuesBase {
         return 0;
     }
 
-    /* access modifiers changed from: package-private */
-    public int getOrientation() {
+    int getOrientation() {
         return this.mOrientation;
     }
 
-    /* access modifiers changed from: package-private */
-    public int getScreenHeight() {
+    int getScreenHeight() {
         return this.mScreenHeight;
     }
 
-    /* access modifiers changed from: package-private */
-    public int getScreenWidth() {
+    int getScreenWidth() {
         return this.mScreenWidth;
     }
 
-    /* access modifiers changed from: package-private */
-    public void rotate() {
+    void rotate() {
         WindowManager windowManager = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
         this.mOrientation = windowManager.getDefaultDisplay().getRotation();
         DisplayMetrics metrics = new DisplayMetrics();
@@ -73,18 +66,15 @@ public class SettingsValues extends SettingsValuesBase {
         this.mScreenHeight = metrics.heightPixels;
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean getVisiblePieActivationAreas() {
+    boolean getVisiblePieActivationAreas() {
         return this.mVisiblePieActivationAreas;
     }
 
-    /* access modifiers changed from: package-private */
-    public void setVisiblePieActivationAread(boolean visible) {
+    void setVisiblePieActivationAread(boolean visible) {
         this.mVisiblePieActivationAreas = visible;
     }
 
-    /* access modifiers changed from: package-private */
-    public Action getIsaAction(int gesture, float startX, float startY) {
+    Action getIsaAction(int gesture, float startX, float startY) {
         float startX2 = startX / this.mTouchscreenScreenFactorX;
         float startY2 = startY / this.mTouchscreenScreenFactorY;
         int i = this.mOrientation;
@@ -106,8 +96,7 @@ public class SettingsValues extends SettingsValuesBase {
         return getIsaAction(((int) ((3.0f * startY2) / ((float) this.mScreenHeight))) + 9);
     }
 
-    /* access modifiers changed from: package-private */
-    public String getPackageNamesOfRecentApps(int numberOfRecentApps) {
+    String getPackageNamesOfRecentApps(int numberOfRecentApps) {
         if (Build.VERSION.SDK_INT < 21) {
             List<ActivityManager.RunningTaskInfo> taskInfo = this.mActivityManager.getRunningTasks(numberOfRecentApps);
             if (taskInfo.size() <= 0) {
@@ -161,13 +150,11 @@ public class SettingsValues extends SettingsValuesBase {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean isNotBlacklisted() {
+    boolean isNotBlacklisted() {
         return this.mBlacklist.size() <= 0 || !this.mBlacklist.contains(getPackageNamesOfRecentApps(1));
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean isNotBlacklistedPie() {
+    boolean isNotBlacklistedPie() {
         return this.mBlacklistPie.size() <= 0 || !this.mBlacklistPie.contains(getPackageNamesOfRecentApps(1));
     }
 }

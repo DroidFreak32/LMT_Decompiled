@@ -295,8 +295,7 @@ class SettingsViewHelper implements AdapterView.OnItemClickListener {
             return row;
         }
 
-        /* access modifiers changed from: package-private */
-        public void addButton(Context context, LinearLayout linearLayout, boolean activated, CompoundButton.OnCheckedChangeListener l) {
+        void addButton(Context context, LinearLayout linearLayout, boolean activated, CompoundButton.OnCheckedChangeListener l) {
             CompoundButton button;
             if (linearLayout.findViewById(listitem_description_button) == null) {
                 if (this.mSimpleUI) {

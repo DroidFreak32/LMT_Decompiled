@@ -6,8 +6,7 @@ import android.content.DialogInterface;
 import android.widget.EditText;
 
 
-/* access modifiers changed from: package-private */
-public abstract class InputDialog extends AlertDialog.Builder implements DialogInterface.OnClickListener {
+abstract class InputDialog extends AlertDialog.Builder implements DialogInterface.OnClickListener {
     Context mContext;
     private final EditText mInput;
 

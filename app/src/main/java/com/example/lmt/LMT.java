@@ -93,8 +93,7 @@ public class LMT extends Activity {
         private final ArrayList<TabInfo> mTabs = new ArrayList<>();
         private final ViewPager mViewPager;
 
-        /* access modifiers changed from: package-private */
-        public static final class TabInfo {
+        static final class TabInfo {
             private final Bundle args;
             private final Class<?> clss;
 
@@ -113,8 +112,7 @@ public class LMT extends Activity {
             this.mViewPager.setOnPageChangeListener(this);
         }
 
-        /* access modifiers changed from: package-private */
-        public void addTab(ActionBar.Tab tab, Class<?> clss) {
+        void addTab(ActionBar.Tab tab, Class<?> clss) {
             TabInfo info = new TabInfo(clss, null);
             tab.setTag(info);
             tab.setTabListener(this);

@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 
-/* access modifiers changed from: package-private */
-public class SettingsSharedPrefsWrapper {
+class SettingsSharedPrefsWrapper {
     protected Context mContext;
     private SharedPreferences mSharedPreferences = null;
 
@@ -16,8 +15,7 @@ public class SettingsSharedPrefsWrapper {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public String loadString(String key, String defaultValue) {
+    String loadString(String key, String defaultValue) {
         SharedPreferences sharedPreferences = this.mSharedPreferences;
         if (sharedPreferences != null) {
             return sharedPreferences.getString(key, defaultValue);
@@ -26,8 +24,7 @@ public class SettingsSharedPrefsWrapper {
         return value == null ? defaultValue : value;
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveString(String key, String value, SharedPreferences.Editor editor) {
+    void saveString(String key, String value, SharedPreferences.Editor editor) {
         SharedPreferences sharedPreferences = this.mSharedPreferences;
         if (sharedPreferences == null) {
             Settings.System.putString(this.mContext.getContentResolver(), key, value);
@@ -40,8 +37,7 @@ public class SettingsSharedPrefsWrapper {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public int loadInt(String key, int defaultValue) {
+    int loadInt(String key, int defaultValue) {
         SharedPreferences sharedPreferences = this.mSharedPreferences;
         if (sharedPreferences != null) {
             return sharedPreferences.getInt(key, defaultValue);
@@ -53,8 +49,7 @@ public class SettingsSharedPrefsWrapper {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void saveInt(String key, int value, SharedPreferences.Editor editor) {
+    void saveInt(String key, int value, SharedPreferences.Editor editor) {
         SharedPreferences sharedPreferences = this.mSharedPreferences;
         if (sharedPreferences == null) {
             Settings.System.putInt(this.mContext.getContentResolver(), key, value);
@@ -67,8 +62,7 @@ public class SettingsSharedPrefsWrapper {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public SharedPreferences.Editor createAndReturnSharedPreferencesEditor() {
+    SharedPreferences.Editor createAndReturnSharedPreferencesEditor() {
         SharedPreferences sharedPreferences = this.mSharedPreferences;
         if (sharedPreferences != null) {
             return sharedPreferences.edit();

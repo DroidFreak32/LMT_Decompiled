@@ -100,8 +100,7 @@ public class PieFragment extends Fragment implements AdapterView.OnItemClickList
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public class CommandSimpleAdapter extends SimpleAdapter {
+    class CommandSimpleAdapter extends SimpleAdapter {
         private int mOffset;
 
         CommandSimpleAdapter(Context context, List<? extends Map<String, ?>> data, int offset) {

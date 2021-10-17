@@ -10,8 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* access modifiers changed from: package-private */
-public class SeparatedListAdapter extends BaseAdapter {
+class SeparatedListAdapter extends BaseAdapter {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     static final String ITEM_CAPTION = "caption";
     static final String ITEM_TITLE = "title";
@@ -30,8 +29,7 @@ public class SeparatedListAdapter extends BaseAdapter {
         this.headers = new ArrayAdapter<>(context, R.layout.listheader);
     }
 
-    /* access modifiers changed from: package-private */
-    public void addSection(String section, Adapter adapter) {
+    void addSection(String section, Adapter adapter) {
         this.headers.add(section);
         this.sections.put(section, adapter);
     }

@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* access modifiers changed from: package-private */
-public class Launcher {
+class Launcher {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static boolean DEBUG = false;
     private static final String TAG = "LMT::Launcher";
@@ -56,8 +55,7 @@ public class Launcher {
         DEBUG = z;
     }
 
-    /* access modifiers changed from: package-private */
-    public void fireAction(Action action) {
+    void fireAction(Action action) {
         Log.d(TAG, "Fire action " + action.toString());
         switch (action.getType()) {
             case 2:
@@ -639,8 +637,7 @@ public class Launcher {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void doOpenNotificationBar() {
+    void doOpenNotificationBar() {
         if (DEBUG) {
             Log.d(TAG, "doOpenNotificationBar()");
         }
@@ -661,8 +658,7 @@ public class Launcher {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void doOpenQuickSettings() {
+    void doOpenQuickSettings() {
         if (DEBUG) {
             Log.d(TAG, "doOpenQuickSettings()");
         }

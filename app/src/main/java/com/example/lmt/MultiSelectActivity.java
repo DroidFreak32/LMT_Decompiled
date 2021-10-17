@@ -167,8 +167,7 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public class AppSimpleAdapter extends SimpleAdapter {
+    class AppSimpleAdapter extends SimpleAdapter {
         AppSimpleAdapter(Context context, List<? extends Map<String, ?>> data) {
             super(context, data, R.layout.listitem_icondescription, new String[]{"title", "caption"}, new int[]{R.id.listitem_icondescription_text, R.id.listitem_icondescription_caption});
         }

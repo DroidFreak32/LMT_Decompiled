@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-/* access modifiers changed from: package-private */
-public abstract class PieControlBase {
+abstract class PieControlBase {
     Context mContext;
     private int mItemSize;
     PieMenu mPie;
@@ -31,8 +30,7 @@ public abstract class PieControlBase {
         container.addView(this.mPie);
     }
 
-    /* access modifiers changed from: package-private */
-    public void removeFromContainer(FrameLayout container) {
+    void removeFromContainer(FrameLayout container) {
         container.removeView(this.mPie);
     }
 
@@ -44,29 +42,25 @@ public abstract class PieControlBase {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void setClickListener(View.OnClickListener listener, PieItem... items) {
+    void setClickListener(View.OnClickListener listener, PieItem... items) {
         for (PieItem item : items) {
             item.getView().setOnClickListener(listener);
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void setLongClickListener(View.OnLongClickListener listener, PieItem... items) {
+    void setLongClickListener(View.OnLongClickListener listener, PieItem... items) {
         for (PieItem item : items) {
             item.getView().setOnLongClickListener(listener);
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void setKeyListener(View.OnKeyListener listener, PieItem... items) {
+    void setKeyListener(View.OnKeyListener listener, PieItem... items) {
         for (PieItem item : items) {
             item.getView().setOnKeyListener(listener);
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public PieItem makeItem(Drawable d0, Drawable d1, int l) {
+    PieItem makeItem(Drawable d0, Drawable d1, int l) {
         ImageView view = new ImageView(this.mContext);
         if (d0 != null) {
             d0.mutate();

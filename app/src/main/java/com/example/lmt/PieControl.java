@@ -7,14 +7,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import java.util.Vector;
 
-/* access modifiers changed from: package-private */
-public class PieControl extends PieControlBase implements View.OnClickListener, View.OnLongClickListener, View.OnKeyListener {
+class PieControl extends PieControlBase implements View.OnClickListener, View.OnLongClickListener, View.OnKeyListener {
     private Launcher mLauncher;
     private Vector<PieItemAction> mPieItemActions = new Vector<>();
     private SettingsValues mSettings;
 
-    /* access modifiers changed from: package-private */
-    public class PieItemAction {
+    class PieItemAction {
         Action mClickAction;
         Action mLongClickAction;
         PieItem mPieItem;

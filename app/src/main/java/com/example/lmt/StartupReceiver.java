@@ -14,8 +14,7 @@ public class StartupReceiver extends BroadcastReceiver {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void startIfRequested(Context context) {
+    void startIfRequested(Context context) {
         SettingsValues settings = SettingsValues.getInstance(context);
         if (settings.loadAutostart() > 0) {
             Log.d(TAG, "Restarting TouchService");

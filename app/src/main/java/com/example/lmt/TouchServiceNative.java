@@ -3,41 +3,30 @@ package com.example.lmt;
 import android.content.Context;
 import android.util.Log;
 
-/* access modifiers changed from: package-private */
-public class TouchServiceNative {
+class TouchServiceNative {
     private static final String TAG = "LMT::TouchServiceNative";
     private static TouchServiceNative instance = null;
     private RootContext mRootContext;
 
-    /* access modifiers changed from: package-private */
-    public native String getServiceVersion();
+    native String getServiceVersion();
 
-    /* access modifiers changed from: package-private */
-    public native void quit();
+    native void quit();
 
-    /* access modifiers changed from: package-private */
-    public native TouchServiceResult run();
+    native TouchServiceResult run();
 
-    /* access modifiers changed from: package-private */
-    public native int setDebug(int i);
+    native int setDebug(int i);
 
-    /* access modifiers changed from: package-private */
-    public native int setInputDevice(String str);
+    native int setInputDevice(String str);
 
-    /* access modifiers changed from: package-private */
-    public native int setMinPathLength(int i);
+    native int setMinPathLength(int i);
 
-    /* access modifiers changed from: package-private */
-    public native int setMinScore(int i);
+    native int setMinScore(int i);
 
-    /* access modifiers changed from: package-private */
-    public native int setOrientation(int i, int i2, int i3);
+    native int setOrientation(int i, int i2, int i3);
 
-    /* access modifiers changed from: package-private */
-    public native int setSingleSwipesBBox(int i);
+    native int setSingleSwipesBBox(int i);
 
-    /* access modifiers changed from: package-private */
-    public native int setSingleTouchGestureSupport(int i);
+    native int setSingleTouchGestureSupport(int i);
 
     static {
         System.loadLibrary("TouchServiceNative");
@@ -54,8 +43,7 @@ public class TouchServiceNative {
         return instance;
     }
 
-    /* access modifiers changed from: package-private */
-    public int setInputDeviceUnlock(String device) {
+    int setInputDeviceUnlock(String device) {
         this.mRootContext.runCommandRemote("version", false);
         Log.d(TAG, "Lib version " + getServiceVersion());
         Log.d(TAG, "Set input device");

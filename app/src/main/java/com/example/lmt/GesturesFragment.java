@@ -109,8 +109,7 @@ public class GesturesFragment extends Fragment implements AdapterView.OnItemClic
         startActivityForResult(new Intent(view.getContext(), CommandSelectActivity.class), 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public class CommandSimpleAdapterGestures extends SimpleAdapter {
+    class CommandSimpleAdapterGestures extends SimpleAdapter {
         private int mOffset;
 
         CommandSimpleAdapterGestures(Context context, List<? extends Map<String, ?>> data, int offset) {

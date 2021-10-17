@@ -139,8 +139,7 @@ public class TouchService extends Service {
         startForeground(777, createNotification());
     }
 
-    /* access modifiers changed from: package-private */
-    public Notification createNotification() {
+    Notification createNotification() {
         if (Build.VERSION.SDK_INT >= 26) {
             ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(new NotificationChannel(this.NOTIFICATION_CHANNEL_ID, this.NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_NONE));
         }
@@ -192,8 +191,7 @@ public class TouchService extends Service {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public boolean checkTime() {
+    boolean checkTime() {
         if (this.mSettings.getDays() > 0) {
             return true;
         }

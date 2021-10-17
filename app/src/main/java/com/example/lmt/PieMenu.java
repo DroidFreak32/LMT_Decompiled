@@ -25,8 +25,7 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-/* access modifiers changed from: package-private */
-public class PieMenu extends FrameLayout {
+class PieMenu extends FrameLayout {
     private static boolean DEBUG = false;
     private static final int MAX_LEVELS = 5;
     private static final String TAG = "LMT::PieMenu";

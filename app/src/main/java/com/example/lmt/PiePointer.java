@@ -12,8 +12,7 @@ import android.os.Handler;
 import android.widget.FrameLayout;
 import com.example.lmt.PieMenu;
 
-/* access modifiers changed from: package-private */
-public class PiePointer implements PieMenu.PieView {
+class PiePointer implements PieMenu.PieView {
     private static final float EMPTY_ANGLE = 0.19634955f;
     private static final int STROKE_SIZE = 4;
     private boolean mActivated;

@@ -28,8 +28,7 @@ public class PieContainer {
         DEBUG = debug;
     }
 
-    /* access modifiers changed from: package-private */
-    public class PieLayout extends FrameLayout {
+    class PieLayout extends FrameLayout {
         boolean mAllowed;
         boolean mBottom;
         boolean mPieControlAdded = false;
@@ -156,8 +155,7 @@ public class PieContainer {
         this.mPieLayout3 = new PieLayout(context, true);
     }
 
-    /* access modifiers changed from: package-private */
-    public void attachToWindowManager() {
+    void attachToWindowManager() {
         if (DEBUG) {
             Log.d(TAG, "attachToWindowManager");
         }
@@ -206,8 +204,7 @@ public class PieContainer {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void removeFromWindowManager() {
+    void removeFromWindowManager() {
         if (DEBUG) {
             Log.d(TAG, "removeFromWindowManager");
         }
@@ -225,8 +222,7 @@ public class PieContainer {
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public void rotate() {
+    void rotate() {
         if (DEBUG) {
             Log.d(TAG, "rotate");
         }

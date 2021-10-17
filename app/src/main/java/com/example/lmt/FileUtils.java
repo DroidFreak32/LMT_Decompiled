@@ -2,8 +2,7 @@ package com.example.lmt;
 
 import java.io.File;
 
-/* access modifiers changed from: package-private */
-public class FileUtils {
+class FileUtils {
     FileUtils() {
     }
 

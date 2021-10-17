@@ -159,8 +159,7 @@ public class CommandSelectActivity extends Activity implements AdapterView.OnIte
         }
     }
 
-    /* access modifiers changed from: package-private */
-    public class CommandSelectSimpleAdapter extends SimpleAdapter {
+    class CommandSelectSimpleAdapter extends SimpleAdapter {
         private int mOffset;
 
         CommandSelectSimpleAdapter(Context context, List<? extends Map<String, ?>> data, int offset) {

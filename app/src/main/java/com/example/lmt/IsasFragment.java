@@ -88,8 +88,7 @@ public class IsasFragment extends Fragment implements AdapterView.OnItemClickLis
         startActivityForResult(new Intent(view.getContext(), CommandSelectActivity.class), 0);
     }
 
-    /* access modifiers changed from: package-private */
-    public class CommandSimpleAdapterIsas extends SimpleAdapter {
+    class CommandSimpleAdapterIsas extends SimpleAdapter {
         private int mOffset;
 
         CommandSimpleAdapterIsas(Context context, List<? extends Map<String, ?>> data, int offset) {
