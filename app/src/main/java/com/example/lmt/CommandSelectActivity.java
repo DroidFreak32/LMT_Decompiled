@@ -179,7 +179,9 @@ public class CommandSelectActivity extends Activity implements AdapterView.OnIte
                 /* access modifiers changed from: protected */
                 @Override // com.noname81.lmt.AsyncDrawableTask
                 public Drawable doInBackground(Void... params) {
-                    return IconUtils.getIconForAction(CommandSelectActivity.this.getApplicationContext(), new Action(CommandSelectSimpleAdapter.this.mOffset + position + 1), null);
+                    return IconUtils.getIconForAction(
+                            CommandSelectActivity.this.getApplicationContext(),new Action(
+                                    CommandSelectSimpleAdapter.this.mOffset + position + 1), null);
                 }
             }.execute(new Void[0]);
             if (this.mOffset + position + 1 == SettingsValues.getInstance(CommandSelectActivity.this.getApplicationContext()).getCurrentAction().getType()) {

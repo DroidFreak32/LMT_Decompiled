@@ -144,7 +144,7 @@ public class PieFragment extends Fragment implements AdapterView.OnItemClickList
                 private int mPosition;
 
                 {
-                    this.mPosition = position;
+                    this.mPosition = mOffset + position;
                 }
 
                 public void onClick(View arg0) {
