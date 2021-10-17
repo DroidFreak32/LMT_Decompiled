@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 /* access modifiers changed from: package-private */
-public class Toaster {
+class Toaster {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     static final int Debug = 1;
     static final int Image = 2;
@@ -19,12 +19,15 @@ public class Toaster {
     private static Toaster instance = null;
     private Context mContext;
     private int mMode;
-    private SettingsValues mSettings = SettingsValues.getInstance(this.mContext);
-    private Vibrator mVibrator = ((Vibrator) this.mContext.getSystemService(Context.VIBRATOR_SERVICE));
+    private SettingsValues mSettings;
+    private Vibrator mVibrator;
 
     private Toaster(Context context) {
         this.mContext = context;
         this.mMode = SettingsValues.getInstance(context).loadFeedbackMode();
+
+        mSettings = SettingsValues.getInstance(context);
+        mVibrator = ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE));
     }
 
     static Toaster getInstance(Context context) {
@@ -35,18 +38,18 @@ public class Toaster {
     }
 
     /* access modifiers changed from: package-private */
-    public int getMode() {
+    int getMode() {
         return this.mMode;
     }
 
     /* access modifiers changed from: package-private */
-    public void setMode(int mode) {
+    void setMode(int mode) {
         this.mMode = mode;
         this.mSettings.saveFeedbackMode(this.mMode);
     }
 
     /* access modifiers changed from: package-private */
-    public void show(TouchServiceResult result) {
+    void show(TouchServiceResult result) {
         int i = this.mMode;
         if (i == 1) {
             showDebug(result);
@@ -81,7 +84,7 @@ public class Toaster {
     }
 
     /* access modifiers changed from: package-private */
-    public void vibratePie() {
+    void vibratePie() {
         this.mVibrator.vibrate((long) this.mSettings.loadPieVibrationTime());
     }
 }
