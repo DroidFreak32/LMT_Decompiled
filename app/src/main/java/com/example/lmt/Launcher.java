@@ -27,16 +27,18 @@ public class Launcher {
     private static boolean DEBUG = false;
     private static final String TAG = "LMT::Launcher";
     private static Launcher instance = null;
-    private ActivityManager mActivityManager = ((ActivityManager) this.mContext.getSystemService(Context.ACTIVITY_SERVICE));
+    private ActivityManager mActivityManager;
     private Context mContext;
     private List<ActivityManager.RecentTaskInfo> mRecentTaskInfo;
-    private RootContext mRootContext = RootContext.getInstance(this.mContext);
+    private RootContext mRootContext;
     private List<ActivityManager.RunningTaskInfo> mRunningTaskInfo;
     private SettingsValues mSettings;
 
     private Launcher(Context context) {
         this.mContext = context;
         this.mSettings = SettingsValues.getInstance(context);
+        mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        mRootContext = RootContext.getInstance(context);
     }
 
     static Launcher getInstance(Context context) {
