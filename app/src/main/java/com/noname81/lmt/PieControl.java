@@ -2,6 +2,7 @@ package com.noname81.lmt;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,6 +12,7 @@ class PieControl extends PieControlBase implements View.OnClickListener, View.On
     private Launcher mLauncher;
     private Vector<PieItemAction> mPieItemActions = new Vector<>();
     private SettingsValues mSettings;
+    private static final String TAG = "LMT::PieControl";
 
     class PieItemAction {
         Action mClickAction;
@@ -132,19 +134,32 @@ class PieControl extends PieControlBase implements View.OnClickListener, View.On
     }
 
     public boolean onLongClick(View v) {
-        int i = 0;
-        while (true) {
-            if (i >= this.mPieItemActions.size()) {
-                break;
-            } else if (this.mPieItemActions.get(i).mPieItem.getView() != v) {
-                i++;
-            } else if (this.mPieItemActions.get(i).mLongClickAction.getType() != 1) {
-                this.mLauncher.fireAction(this.mPieItemActions.get(i).mLongClickAction);
-            } else {
-                this.mLauncher.fireAction(this.mPieItemActions.get(i).mClickAction);
+        for (int i = 0; i < this.mPieItemActions.size(); i++) {
+            PieItemAction PIA = this.mPieItemActions.get(i);
+            if ( PIA.mPieItem.getView() == v) {
+                if (PIA.mLongClickAction.getType() != Action.None)
+                    this.mLauncher.fireAction(PIA.mLongClickAction);
+                else
+                    this.mLauncher.fireAction(PIA.mClickAction);
+                return true;
             }
         }
         return true;
+//        int i = 0;
+//        while (true) {
+//            if (i >= this.mPieItemActions.size()) {
+//                break;
+//            } else if (this.mPieItemActions.get(i).mPieItem.getView() != v) {
+//                i++;
+//            } else if (this.mPieItemActions.get(i).mLongClickAction.getType() != Action.None) {
+//                this.mLauncher.fireAction(this.mPieItemActions.get(i).mLongClickAction);
+//                return true;
+//            } else {
+//                this.mLauncher.fireAction(this.mPieItemActions.get(i).mClickAction);
+//                return true;
+//            }
+//        }
+//        return true;
     }
 
     public boolean onKey(View v, int key, KeyEvent keyEvent) {
