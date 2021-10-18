@@ -4,9 +4,9 @@ import android.content.Context;
 
 class DebugHelper {
     private static DebugHelper instance = null;
-    private boolean mDebugLauncherEnabled = false;
-    private boolean mDebugPieEnabled = false;
-    private boolean mDebugTouchServiceEnabled = false;
+    private boolean mDebugLauncherEnabled = true;
+    private boolean mDebugPieEnabled = true;
+    private boolean mDebugTouchServiceEnabled = true;
     private boolean mNoRootEnabled = true;
 
     private DebugHelper() {
