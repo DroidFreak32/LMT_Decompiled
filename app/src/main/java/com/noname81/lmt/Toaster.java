@@ -51,11 +51,11 @@ class Toaster {
     /* access modifiers changed from: package-private */
     void show(TouchServiceResult result) {
         int i = this.mMode;
-        if (i == 1) {
+        if (i == Debug) {
             showDebug(result);
-        } else if (i == 2) {
+        } else if (i == Image) {
             showImage(result);
-        } else if (i == 3) {
+        } else if (i == Vibrate) {
             vibrateGestures();
         }
     }

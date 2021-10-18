@@ -33,6 +33,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import com.noname81.lmt.PieMenu;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -495,16 +496,16 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
     private void fillClockStrings() {
         Calendar cal = Calendar.getInstance();
         if (this.mTwentyFour == 24) {
-            this.mClockStrings[0] = String.format("%02d:%02d", Integer.valueOf(cal.get(11)), Integer.valueOf(cal.get(12)));
+            this.mClockStrings[0] = String.format(Locale.getDefault(), "%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
             this.mClockStrings[1] = "24h";
             return;
         }
         String[] strArr = this.mClockStrings;
         Object[] objArr = new Object[2];
-        objArr[0] = Integer.valueOf(cal.get(10) == 0 ? 12 : cal.get(10));
-        objArr[1] = Integer.valueOf(cal.get(12));
-        strArr[0] = String.format("%02d:%02d", objArr);
-        this.mClockStrings[1] = cal.get(9) == 0 ? "AM" : "PM";
+        objArr[0] = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
+        objArr[1] = cal.get(Calendar.MINUTE);
+        strArr[0] = String.format(Locale.getDefault(), "%02d:%02d", objArr);
+        this.mClockStrings[1] = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
     }
 
     /* access modifiers changed from: private */
@@ -541,15 +542,18 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
         if (str == null || !str.equals("dMy")) {
             String str2 = this.mDateFormat;
             if (str2 == null || !str2.equals("yMd")) {
-                this.mAIStrings[0] = String.format("%02d | %02d | %04d", Integer.valueOf(cal.get(2) + 1), Integer.valueOf(cal.get(5)), Integer.valueOf(cal.get(1)));
+                this.mAIStrings[0] = String.format(Locale.getDefault(), "%02d | %02d | %04d", cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.YEAR));
             } else {
-                this.mAIStrings[0] = String.format("%04d | %02d | %02d", Integer.valueOf(cal.get(1)), Integer.valueOf(cal.get(2) + 1), Integer.valueOf(cal.get(5)));
+                this.mAIStrings[0] = String.format(Locale.getDefault(), "%04d | %02d | %02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
             }
         } else {
-            this.mAIStrings[0] = String.format("%02d | %02d | %04d", Integer.valueOf(cal.get(5)), Integer.valueOf(cal.get(2) + 1), Integer.valueOf(cal.get(1)));
+            this.mAIStrings[0] = String.format(Locale.getDefault(), "%02d | %02d | %04d", cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR));
         }
         Intent battery = this.mContext.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
-        this.mAIStrings[1] = String.format("Battery %02d%% | %s", Integer.valueOf((battery.getIntExtra("level", 0) * 100) / battery.getIntExtra("scale", 100)), getRingerModeString());
+        this.mAIStrings[1] = String.format(Locale.getDefault(),
+                "Battery %02d%% | %s", (
+                        battery.getIntExtra("level", 0) * 100) / battery.getIntExtra("scale", 100),
+                getRingerModeString());
         this.mAIStrings[2] = getConnectivityString();
     }
 
@@ -557,14 +561,14 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
         if (this.mNotificationDataHelper.getNotificationDataSize() > index) {
             cal.setTimeInMillis(this.mNotificationDataHelper.getNotificationDataTime(index));
             if (this.mTwentyFour == 24) {
-                this.mAIStrings[0] = String.format("%02d:%02d", Integer.valueOf(cal.get(11)), Integer.valueOf(cal.get(12)));
+                this.mAIStrings[0] = String.format(Locale.getDefault(), "%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
             } else {
                 String[] strArr = this.mAIStrings;
                 Object[] objArr = new Object[3];
-                objArr[0] = Integer.valueOf(cal.get(10));
-                objArr[1] = Integer.valueOf(cal.get(12));
-                objArr[2] = cal.get(9) == 0 ? "AM" : "PM";
-                strArr[0] = String.format("%02d:%02d %s", objArr);
+                objArr[0] = cal.get(Calendar.HOUR);
+                objArr[1] = cal.get(Calendar.MINUTE);
+                objArr[2] = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+                strArr[0] = String.format(Locale.getDefault(), "%02d:%02d %s", objArr);
             }
             this.mAIStrings[1] = this.mNotificationDataHelper.getNotificationDataName(index);
             if (this.mAIStrings[1].length() > 25) {
@@ -600,7 +604,7 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
         }
         if (ni.getType() == 1) {
             WifiManager wifi = (WifiManager) this.mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            if (wifi.getWifiState() != 3) {
+            if (wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
                 return connectivity;
             }
             return connectivity + " | " + wifi.getConnectionInfo().getRssi() + " dBm";

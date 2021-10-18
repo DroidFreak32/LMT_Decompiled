@@ -122,7 +122,7 @@ class SettingsValues extends SettingsValuesBase {
             if (numberOfRecentApps > 1) {
                 SortedMap<Long, UsageStats> sortedMap = new TreeMap<>(Collections.reverseOrder());
                 for (UsageStats app : appList) {
-                    sortedMap.put(Long.valueOf(app.getLastTimeUsed()), app);
+                    sortedMap.put(app.getLastTimeUsed(), app);
                 }
                 int i2 = 0;
                 StringBuilder stringBuilder2 = new StringBuilder();
