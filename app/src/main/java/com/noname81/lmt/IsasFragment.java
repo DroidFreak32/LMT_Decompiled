@@ -34,7 +34,7 @@ public class IsasFragment extends Fragment implements AdapterView.OnItemClickLis
         SeparatedListAdapter separatedListAdapter;
         if (!(this.mListView == null || (separatedListAdapter = this.mAdapter) == null)) {
             separatedListAdapter.notifyDataSetChanged();
-            this.mListView.setAdapter((ListAdapter) this.mAdapter);
+            this.mListView.setAdapter(this.mAdapter);
         }
         super.onResume();
     }
@@ -63,7 +63,7 @@ public class IsasFragment extends Fragment implements AdapterView.OnItemClickLis
         this.mAdapter.addSection(getString(R.string.isas_isa_areas_left), new CommandSimpleAdapterIsas(getActivity(), isasLeft, 6));
         this.mAdapter.addSection(getString(R.string.isas_isa_areas_right), new CommandSimpleAdapterIsas(getActivity(), isasRight, 9));
         this.mListView = new ListView(getActivity());
-        this.mListView.setAdapter((ListAdapter) this.mAdapter);
+        this.mListView.setAdapter(this.mAdapter);
         this.mListView.setOnItemClickListener(this);
         this.mListView.setDividerHeight(0);
         return this.mListView;
@@ -72,16 +72,16 @@ public class IsasFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override // android.widget.AdapterView.OnItemClickListener
     public void onItemClick(AdapterView<?> adapterView, View view, int pos, long arg3) {
         int realPos = pos;
-        if (realPos >= 0) {
+        if (realPos >= offsetIsasBottom) {
             realPos--;
         }
-        if (realPos >= 3) {
+        if (realPos >= offsetIsasTop) {
             realPos--;
         }
-        if (realPos >= 6) {
+        if (realPos >= offsetIsasLeft) {
             realPos--;
         }
-        if (realPos >= 9) {
+        if (realPos >= offsetIsasRight) {
             realPos--;
         }
         SettingsValues.getInstance(getActivity()).setCurrentIsa(realPos);
@@ -98,8 +98,8 @@ public class IsasFragment extends Fragment implements AdapterView.OnItemClickLis
 
         public View getView(final int position, View convertView, ViewGroup parent) {
             View row = super.getView(position, convertView, parent);
-            ImageView icon = (ImageView) row.findViewById(R.id.listitem_icondescriptionicon_icon);
-            ImageView icon2 = (ImageView) row.findViewById(R.id.listitem_icondescriptionicon_icon2);
+            ImageView icon = row.findViewById(R.id.listitem_icondescriptionicon_icon);
+            ImageView icon2 = row.findViewById(R.id.listitem_icondescriptionicon_icon2);
             IconUtils.setMaxSizeForImageView(IsasFragment.this.getActivity(), icon);
             new AsyncDrawableTask(icon, R.drawable.none) {
                 /* class com.noname81.lmt.IsasFragment.CommandSimpleAdapterIsas.AsyncTaskC05191 */
@@ -109,7 +109,7 @@ public class IsasFragment extends Fragment implements AdapterView.OnItemClickLis
                 public Drawable doInBackground(Void... params) {
                     return IconUtils.getIconForISA(IsasFragment.this.getActivity());
                 }
-            }.execute(new Void[0]);
+            }.execute();
             IconUtils.setMaxSizeForImageView(IsasFragment.this.getActivity(), icon2);
             new AsyncDrawableTask(icon2, R.drawable.none) {
                 /* class com.noname81.lmt.IsasFragment.CommandSimpleAdapterIsas.AsyncTaskC05202 */
@@ -119,7 +119,7 @@ public class IsasFragment extends Fragment implements AdapterView.OnItemClickLis
                 public Drawable doInBackground(Void... params) {
                     return IconUtils.getIconForAction(IsasFragment.this.getActivity(), SettingsValues.getInstance(IsasFragment.this.getActivity()).getIsaAction(CommandSimpleAdapterIsas.this.mOffset + position), null);
                 }
-            }.execute(new Void[0]);
+            }.execute();
             return row;
         }
     }

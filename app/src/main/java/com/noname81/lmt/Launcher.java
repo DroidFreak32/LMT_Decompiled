@@ -60,125 +60,122 @@ class Launcher {
     void fireAction(Action action) {
         Log.d(TAG, "Fire action " + action.toString());
         switch (action.getType()) {
-            case 2:
+            case Action.App:
                 doAppAction(action.getString());
                 return;
-            case 3:
+            case Action.Home:
                 doHomeAction();
                 return;
-            case 4:
+            case Action.HomeLongpress:
                 doHomeLongpressAction();
                 return;
-            case 5:
+            case Action.Menu:
                 doMenuAction();
                 return;
-            case 6:
+            case Action.MenuLongpress:
                 doMenuLongpressAction();
                 return;
-            case 7:
+            case Action.Back:
                 doBackAction();
                 return;
-            case 8:
+            case Action.BackLongpress:
                 doBackLongpressAction();
                 return;
-            case 9:
+            case Action.RecentApps:
                 doRecentAppsAction();
                 return;
-            case 10:
+            case Action.Search:
                 doSearchAction();
                 return;
-            case 11:
+            case Action.SearchLongpress:
                 doSearchLongpressAction();
                 return;
-            case 12:
+            case Action.NextApp:
                 doNextApp();
                 return;
-            case 13:
+            case Action.PrevApp:
                 doPrevApp();
                 return;
-            case 14:
+            case Action.LastApp:
                 doLastApp();
                 return;
-            case 15:
+            case Action.OpenNotificationBar:
                 doOpenNotificationBar();
                 return;
-            case 16:
+            case Action.OpenQuickSettings:
                 doOpenQuickSettings();
                 return;
-            case 17:
+            case Action.OpenKeyboard:
                 doOpenKeyboard();
                 return;
-            case 18:
+            case Action.OpenPowerMenu:
                 doPowerMenuAction();
                 return;
-            case 19:
+            case Action.WifiToggle:
+                doWifiToggleAction();
+                return;
+            case Action.DataToggle:
+                doDataToggleAction();
+                return;
+            case Action.BluetoothToggle:
+                doBluetoothToggleAction();
+                return;
+            case Action.GPSToggle:
+                doGPSToggleAction();
+                return;
+            case Action.ImmersiveModeToggle:
+                doImmersiveModeToggleAction();
+                return;
+            case Action.Key:
+                doKeyAction(action.getString());
+                return;
+            case Action.Activity:
+                doActivityAction(action.getString());
+                return;
+            case Action.WebPage:
+                doWebPageAction(action.getString());
+                return;
+            case Action.Script:
+                doScriptAction(action.getString());
+                return;
+            case Action.KillApp:
+                doKillAppAction();
+                return;
+            case Action.KillAllApps:
+                doKillAllAppsAction();
+                return;
+            case Action.TaskerTask:
+                doTaskerAction(action.getString());
+                return;
+            case Action.Shortcut:
+                doShortcutAction(action.getString());
+                return;
+            case Action.Screenshot:
+                doScreenshotAction();
+                return;
+            case Action.UnpinApp:
+                doUnpinAppAction();
+                return;
+            case Action.NowOnTap:
+                doNowOnTapAction();
+                return;
+            case Action.Assistant:
+                doAssistantAction();
+                return;
+            case Action.SplitScreen:
+                doSplitScreenAction();
+                return;
+            case Action.Nova:
+                doOpenNova();
+                return;
+            case Action.Apex:
+                doOpenApex();
+                return;
+            case Action.Holo:
+                doOpenHolo();
             case 25:
             case 39:
             default:
-                return;
-            case 20:
-                doWifiToggleAction();
-                return;
-            case 21:
-                doDataToggleAction();
-                return;
-            case 22:
-                doBluetoothToggleAction();
-                return;
-            case 23:
-                doGPSToggleAction();
-                return;
-            case 24:
-                doImmersiveModeToggleAction();
-                return;
-            case 26:
-                doKeyAction(action.getString());
-                return;
-            case 27:
-                doActivityAction(action.getString());
-                return;
-            case 28:
-                doWebPageAction(action.getString());
-                return;
-            case 29:
-                doScriptAction(action.getString());
-                return;
-            case 30:
-                doKillAppAction();
-                return;
-            case 31:
-                doKillAllAppsAction();
-                return;
-            case 32:
-                doTaskerAction(action.getString());
-                return;
-            case 33:
-                doShortcutAction(action.getString());
-                return;
-            case 34:
-                doScreenshotAction();
-                return;
-            case 35:
-                doUnpinAppAction();
-                return;
-            case 36:
-                doNowOnTapAction();
-                return;
-            case 37:
-                doAssistantAction();
-                return;
-            case 38:
-                doSplitScreenAction();
-                return;
-            case 40:
-                doOpenNova();
-                return;
-            case 41:
-                doOpenApex();
-                return;
-            case 42:
-                doOpenHolo();
-                return;
         }
     }
 

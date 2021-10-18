@@ -61,7 +61,7 @@ public class AccessibilityHandler extends AccessibilityService {
             return;
         }
         AccessibilityServiceInfo info = new AccessibilityServiceInfo();
-        info.eventTypes = 64;
+        info.eventTypes = AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED;
         info.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC;
         setServiceInfo(info);
         this.mNotificationDataHelper = NotificationDataHelper.getInstance();
@@ -85,7 +85,7 @@ public class AccessibilityHandler extends AccessibilityService {
     static boolean isAccessibilityAvailable(Context context, boolean trace) {
         boolean result = Build.VERSION.SDK_INT >= 16 && mInitialized && instance != null;
         if (trace && !result) {
-            Toast.makeText(context, (int) R.string.accessibility_activate_lmts_accessibility_service, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.accessibility_activate_lmts_accessibility_service, Toast.LENGTH_SHORT).show();
             Log.e(TAG, "Please activate LMT's accessibility service!");
         }
         return result;

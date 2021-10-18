@@ -47,7 +47,6 @@ class PieMenu extends FrameLayout {
     private int mOutlineGradient;
     private Paint mOutlinePaint;
     private PieView mPiePointer;
-    private int mPointerColor;
     private int mRadius;
     private int mRadiusInc;
     private boolean mRotateImages;
@@ -56,9 +55,6 @@ class PieMenu extends FrameLayout {
     private Paint mShiftPaint;
     private int mSlop;
     private PieView mStatusInfo;
-    private int mStatusInfoClockColor;
-    private int mStatusInfoDimColor;
-    private int mStatusInfoNotificationsColor;
     private Toaster mToaster;
     private int mTouchOffset;
     private Rect mWindow;
@@ -106,7 +102,7 @@ class PieMenu extends FrameLayout {
         this.mLongpress = false;
         this.mItems = new ArrayList();
         this.mLevels = 0;
-        this.mCounts = new int[5];
+        this.mCounts = new int[MAX_LEVELS];
         Resources res = context.getResources();
         this.mRadius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) this.mSettings.loadPieInnerRadius(), res.getDisplayMetrics());
         this.mRadiusInc = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) this.mSettings.loadPieOuterRadius(), res.getDisplayMetrics());
@@ -256,7 +252,7 @@ class PieMenu extends FrameLayout {
                 this.mSelectedPaint.setColor(Color.argb(64, 0, 255, 0));
                 this.mShiftPaint.setColor(Color.argb(64, 0, 255, 0));
                 this.mOutlinePaint.setColor(Color.argb(127, 0, 255, 0));
-                this.mIconColor = Color.argb((int) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 0, 255, 0);
+                this.mIconColor = Color.argb(ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 0, 255, 0);
                 this.mNormalGradient = -2;
                 this.mOutlineGradient = -2;
                 break;
@@ -265,7 +261,7 @@ class PieMenu extends FrameLayout {
                 this.mSelectedPaint.setColor(Color.argb(64, 255, 0, 0));
                 this.mShiftPaint.setColor(Color.argb(64, 255, 0, 0));
                 this.mOutlinePaint.setColor(Color.argb(127, 255, 0, 0));
-                this.mIconColor = Color.argb((int) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 255, 0, 0);
+                this.mIconColor = Color.argb(ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 255, 0, 0);
                 this.mNormalGradient = -2;
                 this.mOutlineGradient = -2;
                 break;
@@ -312,52 +308,56 @@ class PieMenu extends FrameLayout {
                 break;
         }
         String colorStatusInfoString = this.mSettings.loadPieStatusInfoColor();
+        int mStatusInfoClockColor;
+        int mStatusInfoDimColor;
+        int mStatusInfoNotificationsColor;
         if (colorStatusInfoString.equals("0")) {
-            this.mStatusInfoClockColor = -1;
-            this.mStatusInfoNotificationsColor = -1;
-            this.mStatusInfoDimColor = manipulateColor(this.mNormalPaint.getColor(), 0.2f);
+            mStatusInfoClockColor = -1;
+            mStatusInfoNotificationsColor = -1;
+            mStatusInfoDimColor = manipulateColor(this.mNormalPaint.getColor(), 0.2f);
         } else {
             try {
                 String[] colorStatusInfoStrings = colorStatusInfoString.replace(" ", BuildConfig.FLAVOR).split(",");
                 if (colorStatusInfoStrings.length <= 0 || colorStatusInfoStrings[0].length() == 0) {
-                    this.mStatusInfoClockColor = -1;
+                    mStatusInfoClockColor = -1;
                 } else {
-                    this.mStatusInfoClockColor = Color.parseColor(colorStatusInfoStrings[0]);
+                    mStatusInfoClockColor = Color.parseColor(colorStatusInfoStrings[0]);
                 }
                 if (colorStatusInfoStrings.length <= 1 || colorStatusInfoStrings[1].length() == 0) {
-                    this.mStatusInfoNotificationsColor = -1;
+                    mStatusInfoNotificationsColor = -1;
                 } else {
-                    this.mStatusInfoNotificationsColor = Color.parseColor(colorStatusInfoStrings[1]);
+                    mStatusInfoNotificationsColor = Color.parseColor(colorStatusInfoStrings[1]);
                 }
                 if (colorStatusInfoStrings.length <= 2 || colorStatusInfoStrings[2].length() == 0) {
-                    this.mStatusInfoDimColor = Color.argb((int) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 0, 0, 0);
+                    mStatusInfoDimColor = Color.argb(ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 0, 0, 0);
                 } else {
-                    this.mStatusInfoDimColor = Color.parseColor(colorStatusInfoStrings[2]);
+                    mStatusInfoDimColor = Color.parseColor(colorStatusInfoStrings[2]);
                 }
             } catch (Exception e) {
-                this.mStatusInfoClockColor = -1;
-                this.mStatusInfoNotificationsColor = -1;
-                this.mStatusInfoDimColor = Color.argb((int) ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 0, 0, 0);
+                mStatusInfoClockColor = -1;
+                mStatusInfoNotificationsColor = -1;
+                mStatusInfoDimColor = Color.argb(ItemTouchHelper.Callback.DEFAULT_DRAG_ANIMATION_DURATION, 0, 0, 0);
             }
         }
         String colorPointerString = this.mSettings.loadPiePointerColor();
+        int mPointerColor;
         if (colorPointerString.equals("0")) {
-            this.mPointerColor = res.getColor(R.color.qc_normal_blue);
+            mPointerColor = res.getColor(R.color.qc_normal_blue);
         } else {
             try {
                 String[] colorPointerStrings = colorPointerString.replace(" ", BuildConfig.FLAVOR).split(",");
                 if (colorPointerStrings.length <= 0 || colorPointerStrings[0].length() == 0) {
-                    this.mPointerColor = res.getColor(R.color.qc_normal_blue);
+                    mPointerColor = res.getColor(R.color.qc_normal_blue);
                 } else {
-                    this.mPointerColor = Color.parseColor(colorPointerStrings[0]);
+                    mPointerColor = Color.parseColor(colorPointerStrings[0]);
                 }
             } catch (Exception e2) {
-                this.mPointerColor = res.getColor(R.color.qc_normal_blue);
+                mPointerColor = res.getColor(R.color.qc_normal_blue);
             }
         }
-        this.mPiePointer = new PiePointer(this, context, this.mPointerColor);
+        this.mPiePointer = new PiePointer(this, context, mPointerColor);
         if (this.mSettings.loadPieShowStatusInfos() > 0) {
-            this.mStatusInfo = new PieStatusInfo(this, context, this.mStatusInfoClockColor, this.mStatusInfoNotificationsColor, this.mSelectedPaint.getColor(), this.mStatusInfoDimColor);
+            this.mStatusInfo = new PieStatusInfo(this, context, mStatusInfoClockColor, mStatusInfoNotificationsColor, this.mSelectedPaint.getColor(), mStatusInfoDimColor);
         }
     }
 
@@ -531,6 +531,7 @@ class PieMenu extends FrameLayout {
         }
     }
 
+    //TODO: Check logic
     private void layoutPie() {
         int outer;
         int i;

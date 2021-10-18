@@ -263,12 +263,12 @@ class SettingsViewHelper implements AdapterView.OnItemClickListener {
                     }
                 }.show();
             } else if (pos == this.posAddBlacklist) {
-                MultiSelectActivity.AppSelectMode = 3;
+                MultiSelectActivity.selectMode = MultiSelectActivity.SelectBlacklisted;
                 this.mActivity.startActivity(new Intent(this.mActivity, MultiSelectActivity.class));
             } else if (pos == this.posClearBlacklist) {
                 this.mSettings.clearBlacklisted();
             } else if (pos == this.posAddBlacklistPie) {
-                MultiSelectActivity.AppSelectMode = 4;
+                MultiSelectActivity.selectMode = MultiSelectActivity.SelectBlacklistedPie;
                 this.mActivity.startActivity(new Intent(this.mActivity, MultiSelectActivity.class));
             } else if (pos == this.posClearBlacklistPie) {
                 this.mSettings.clearBlacklistedPie();

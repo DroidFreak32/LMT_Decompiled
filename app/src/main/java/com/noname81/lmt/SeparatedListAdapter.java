@@ -38,7 +38,7 @@ class SeparatedListAdapter extends BaseAdapter {
         for (Object section : this.sections.keySet()) {
             Adapter adapter = this.sections.get(section);
             int size = adapter.getCount() + 1;
-            if (position == 0) {
+            if (position == TYPE_SECTION_HEADER) {
                 return section;
             }
             if (position < size) {

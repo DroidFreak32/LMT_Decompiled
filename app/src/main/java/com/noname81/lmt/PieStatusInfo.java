@@ -514,25 +514,25 @@ public class PieStatusInfo implements SensorEventListener, PieMenu.PieView {
         int i = this.mAIContent;
         if (i == 0) {
             fillOverview(cal);
-            this.mAIContent = 1;
+            this.mAIContent = AIContentOverview;
         } else if (i == 1) {
             fillNotification(cal, 0);
-            this.mAIContent = 2;
+            this.mAIContent = AINotification1;
         } else if (i == 2 && this.mNotificationDataHelper.getNotificationDataSize() > 1) {
             fillNotification(cal, 1);
-            this.mAIContent = 3;
-        } else if (this.mAIContent == 3 && this.mNotificationDataHelper.getNotificationDataSize() > 2) {
+            this.mAIContent = AINotification2;
+        } else if (this.mAIContent == AINotification2 && this.mNotificationDataHelper.getNotificationDataSize() > 2) {
             fillNotification(cal, 2);
-            this.mAIContent = 4;
-        } else if (this.mAIContent == 4 && this.mNotificationDataHelper.getNotificationDataSize() > 3) {
+            this.mAIContent = AINotification3;
+        } else if (this.mAIContent == AINotification3 && this.mNotificationDataHelper.getNotificationDataSize() > 3) {
             fillNotification(cal, 3);
-            this.mAIContent = 5;
-        } else if (this.mAIContent != 5 || this.mNotificationDataHelper.getNotificationDataSize() <= 4) {
+            this.mAIContent = AINotification4;
+        } else if (this.mAIContent != AINotification4 || this.mNotificationDataHelper.getNotificationDataSize() <= 4) {
             fillOverview(cal);
-            this.mAIContent = 1;
+            this.mAIContent = AIContentOverview;
         } else {
             fillNotification(cal, 4);
-            this.mAIContent = 6;
+            this.mAIContent = AIContentInvalid;
         }
     }
 

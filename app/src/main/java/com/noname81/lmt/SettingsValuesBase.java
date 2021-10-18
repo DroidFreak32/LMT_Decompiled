@@ -70,21 +70,21 @@ class SettingsValuesBase extends SettingsSharedPrefsWrapper {
         if (gesture < this.mGestureActions.size()) {
             return this.mGestureActions.get(gesture);
         }
-        return new Action(1);
+        return new Action(Action.None);
     }
 
     Action getPieAction(int pie) {
         if (pie < this.mPieActions.size()) {
             return this.mPieActions.get(pie);
         }
-        return new Action(1);
+        return new Action(Action.None);
     }
 
     Action getIsaAction(int isa) {
         if (isa < this.mIsaActions.size()) {
             return this.mIsaActions.get(isa);
         }
-        return new Action(1);
+        return new Action(Action.None);
     }
 
     Action getCurrentAction() {

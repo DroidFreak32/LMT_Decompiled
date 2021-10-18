@@ -55,7 +55,6 @@ class IconUtils {
             size = (int) TypedValue.applyDimension(1, 35.0f, res.getDisplayMetrics());
         }
         if (size > 0) {
-            Log.e("LMT", "\n\n\n\n\nBITMAP WIDTH!!!" + image.getClass());
             Bitmap bitmapimage = Bitmap.createScaledBitmap(getBitmapFromDrawable(image), size, size, true);
             BitmapDrawable bd = new BitmapDrawable(res, bitmapimage);
             if (noFilter) {

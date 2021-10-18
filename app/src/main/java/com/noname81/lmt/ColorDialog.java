@@ -13,25 +13,21 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 abstract class ColorDialog extends AlertDialog.Builder implements DialogInterface.OnClickListener, View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     static final /* synthetic */ boolean $assertionsDisabled = false;
-    private TextView mAlphaLabel;
     private SeekBar mAlphaSeek;
     private TextView mAlphaValue;
-    private TextView mBlueLabel;
     private SeekBar mBlueSeek;
     private TextView mBlueValue;
-    private Button mColorLast;
-    private Button mColorNext;
     private Button mColorPreview;
     private int mColorSelectionCurrent;
     private String[] mColorSelectionStrings;
     private int[] mColorSelectionValues;
     private EditText mColorString;
-    private TextView mGreenLabel;
     private SeekBar mGreenSeek;
     private TextView mGreenValue;
-    private TextView mRedLabel;
     private SeekBar mRedSeek;
     private TextView mRedValue;
 
@@ -40,43 +36,50 @@ abstract class ColorDialog extends AlertDialog.Builder implements DialogInterfac
     ColorDialog(Context context, String title, String[] colorSelectionStrings, String colorString) {
         super(context);
         setTitle(title);
-        View layout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.color, (ViewGroup) null);
+        View layout = ((LayoutInflater) Objects.requireNonNull(context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))).inflate(R.layout.color, (ViewGroup) null);
         setView(layout);
-        this.mAlphaLabel = (TextView) layout.findViewById(R.id.alpha_label);
-        this.mAlphaValue = (TextView) layout.findViewById(R.id.alpha_value);
-        this.mAlphaSeek = (SeekBar) layout.findViewById(R.id.alpha_seek);
-        this.mAlphaLabel.setText(R.string.alpha_string);
+
+        TextView mAlphaLabel = layout.findViewById(R.id.alpha_label);
+        mAlphaLabel.setText(R.string.alpha_string);
+        this.mAlphaValue = layout.findViewById(R.id.alpha_value);
+        this.mAlphaSeek = layout.findViewById(R.id.alpha_seek);
         this.mAlphaSeek.setOnSeekBarChangeListener(this);
-        this.mRedLabel = (TextView) layout.findViewById(R.id.red_label);
-        this.mRedValue = (TextView) layout.findViewById(R.id.red_value);
-        this.mRedSeek = (SeekBar) layout.findViewById(R.id.red_seek);
-        this.mRedLabel.setText(R.string.red_string);
+
+        TextView mRedLabel = layout.findViewById(R.id.red_label);
+        mRedLabel.setText(R.string.red_string);
+        this.mRedValue = layout.findViewById(R.id.red_value);
+        this.mRedSeek = layout.findViewById(R.id.red_seek);
         this.mRedSeek.setOnSeekBarChangeListener(this);
-        this.mGreenLabel = (TextView) layout.findViewById(R.id.green_label);
-        this.mGreenValue = (TextView) layout.findViewById(R.id.green_value);
-        this.mGreenSeek = (SeekBar) layout.findViewById(R.id.green_seek);
-        this.mGreenLabel.setText(R.string.green_string);
+
+        TextView mGreenLabel = layout.findViewById(R.id.green_label);
+        mGreenLabel.setText(R.string.green_string);
+        this.mGreenValue = layout.findViewById(R.id.green_value);
+        this.mGreenSeek = layout.findViewById(R.id.green_seek);
         this.mGreenSeek.setOnSeekBarChangeListener(this);
-        this.mBlueLabel = (TextView) layout.findViewById(R.id.blue_label);
-        this.mBlueValue = (TextView) layout.findViewById(R.id.blue_value);
-        this.mBlueSeek = (SeekBar) layout.findViewById(R.id.blue_seek);
-        this.mBlueLabel.setText(R.string.blue_string);
+
+        TextView mBlueLabel = layout.findViewById(R.id.blue_label);
+        mBlueLabel.setText(R.string.blue_string);
+        this.mBlueValue = layout.findViewById(R.id.blue_value);
+        this.mBlueSeek = layout.findViewById(R.id.blue_seek);
         this.mBlueSeek.setOnSeekBarChangeListener(this);
-        this.mColorPreview = (Button) layout.findViewById(R.id.color_preview);
+
+        this.mColorPreview = layout.findViewById(R.id.color_preview);
         this.mColorPreview.setOnClickListener(this);
-        this.mColorLast = (Button) layout.findViewById(R.id.color_last);
-        this.mColorLast.setText("<");
-        this.mColorLast.setOnClickListener(this);
+
+        Button mColorLast = layout.findViewById(R.id.color_last);
+        mColorLast.setText("<");
+        mColorLast.setOnClickListener(this);
+
         if (colorSelectionStrings.length == 1) {
-            this.mColorLast.setVisibility(View.INVISIBLE);
+            mColorLast.setVisibility(View.INVISIBLE);
         }
-        this.mColorNext = (Button) layout.findViewById(R.id.color_next);
-        this.mColorNext.setText(">");
-        this.mColorNext.setOnClickListener(this);
+        Button mColorNext = layout.findViewById(R.id.color_next);
+        mColorNext.setText(">");
+        mColorNext.setOnClickListener(this);
         if (colorSelectionStrings.length == 1) {
-            this.mColorNext.setVisibility(View.INVISIBLE);
+            mColorNext.setVisibility(View.INVISIBLE);
         }
-        this.mColorString = (EditText) layout.findViewById(R.id.color_string);
+        this.mColorString = layout.findViewById(R.id.color_string);
         this.mColorString.setText(colorString);
         this.mColorSelectionCurrent = 0;
         this.mColorSelectionStrings = colorSelectionStrings;
@@ -107,16 +110,16 @@ abstract class ColorDialog extends AlertDialog.Builder implements DialogInterfac
         if (fromUser) {
             switch (seekBar.getId()) {
                 case R.id.alpha_seek /*{ENCODED_INT: 2131230751}*/:
-                    this.mAlphaValue.setText(Integer.toString(progress));
+                    this.mAlphaValue.setText(String.valueOf(progress));
                     break;
                 case R.id.blue_seek /*{ENCODED_INT: 2131230760}*/:
-                    this.mBlueValue.setText(Integer.toString(progress));
+                    this.mBlueValue.setText(String.valueOf(progress));
                     break;
                 case R.id.green_seek /*{ENCODED_INT: 2131230809}*/:
-                    this.mGreenValue.setText(Integer.toString(progress));
+                    this.mGreenValue.setText(String.valueOf(progress));
                     break;
                 case R.id.red_seek /*{ENCODED_INT: 2131230869}*/:
-                    this.mRedValue.setText(Integer.toString(progress));
+                    this.mRedValue.setText(String.valueOf(progress));
                     break;
             }
             int color = Color.argb(this.mAlphaSeek.getProgress(), this.mRedSeek.getProgress(), this.mGreenSeek.getProgress(), this.mBlueSeek.getProgress());
@@ -153,7 +156,6 @@ abstract class ColorDialog extends AlertDialog.Builder implements DialogInterfac
                 updateColorPreviews();
                 return;
             default:
-                return;
         }
     }
 
@@ -204,22 +206,22 @@ abstract class ColorDialog extends AlertDialog.Builder implements DialogInterfac
         int color = this.mColorSelectionValues[this.mColorSelectionCurrent];
         if (color == -2) {
             this.mAlphaSeek.setProgress(255);
-            this.mAlphaValue.setText(Integer.toString(this.mAlphaSeek.getProgress()));
+            this.mAlphaValue.setText(String.valueOf(this.mAlphaSeek.getProgress()));
             this.mRedSeek.setProgress(0);
-            this.mRedValue.setText(Integer.toString(this.mRedSeek.getProgress()));
+            this.mRedValue.setText(String.valueOf(this.mRedSeek.getProgress()));
             this.mGreenSeek.setProgress(0);
-            this.mGreenValue.setText(Integer.toString(this.mGreenSeek.getProgress()));
+            this.mGreenValue.setText(String.valueOf(this.mGreenSeek.getProgress()));
             this.mBlueSeek.setProgress(0);
-            this.mBlueValue.setText(Integer.toString(this.mBlueSeek.getProgress()));
-            this.mColorPreview.setBackgroundColor(ViewCompat.MEASURED_STATE_MASK);
+            this.mBlueValue.setText(String.valueOf(this.mBlueSeek.getProgress()));
+            this.mColorPreview.setBackgroundColor(View.MEASURED_STATE_MASK);
         } else {
-            this.mAlphaValue.setText(Integer.toString(Color.alpha(color)));
+            this.mAlphaValue.setText(String.valueOf(Color.alpha(color)));
             this.mAlphaSeek.setProgress(Color.alpha(color));
-            this.mRedValue.setText(Integer.toString(Color.red(color)));
+            this.mRedValue.setText(String.valueOf(Color.red(color)));
             this.mRedSeek.setProgress(Color.red(color));
-            this.mGreenValue.setText(Integer.toString(Color.green(color)));
+            this.mGreenValue.setText(String.valueOf(Color.green(color)));
             this.mGreenSeek.setProgress(Color.green(color));
-            this.mBlueValue.setText(Integer.toString(Color.blue(color)));
+            this.mBlueValue.setText(String.valueOf(Color.blue(color)));
             this.mBlueSeek.setProgress(Color.blue(color));
             this.mColorPreview.setBackgroundColor(this.mColorSelectionValues[this.mColorSelectionCurrent]);
         }
@@ -233,7 +235,7 @@ abstract class ColorDialog extends AlertDialog.Builder implements DialogInterfac
             int[] iArr = this.mColorSelectionValues;
             if (iArr[i] != -2) {
                 oneColorSet = true;
-                overallColorString.append(String.format("#%02x%02x%02x%02x", Integer.valueOf(Color.alpha(iArr[i])), Integer.valueOf(Color.red(this.mColorSelectionValues[i])), Integer.valueOf(Color.green(this.mColorSelectionValues[i])), Integer.valueOf(Color.blue(this.mColorSelectionValues[i]))));
+                overallColorString.append(String.format("#%02x%02x%02x%02x", Color.alpha(iArr[i]), Color.red(this.mColorSelectionValues[i]), Color.green(this.mColorSelectionValues[i]), Color.blue(this.mColorSelectionValues[i])));
             }
         }
         if (oneColorSet) {

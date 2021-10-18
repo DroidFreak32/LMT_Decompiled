@@ -70,8 +70,8 @@ public class PieFragment extends Fragment implements AdapterView.OnItemClickList
         level2.add(SeparatedListAdapter.createItem("Pie item 7", getString(R.string.pie_level_2_item_7)));
         level2.add(SeparatedListAdapter.createItem("Pie item 7 longpress", getString(R.string.pie_level_2_item_7_longpress)));
         this.mAdapter = new SeparatedListAdapter(getActivity());
-        this.mAdapter.addSection(getString(R.string.pie_level_1), new CommandSimpleAdapter(getActivity(), level1, 0));
-        this.mAdapter.addSection(getString(R.string.pie_level_2), new CommandSimpleAdapter(getActivity(), level2, 10));
+        this.mAdapter.addSection(getString(R.string.pie_level_1), new CommandSimpleAdapter(getActivity(), level1, offsetLevel1));
+        this.mAdapter.addSection(getString(R.string.pie_level_2), new CommandSimpleAdapter(getActivity(), level2, offsetLevel2));
         this.mListView = new ListView(getActivity());
         this.mListView.setAdapter((ListAdapter) this.mAdapter);
         this.mListView.setOnItemClickListener(this);

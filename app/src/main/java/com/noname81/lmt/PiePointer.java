@@ -10,7 +10,6 @@ import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.os.Handler;
 import android.widget.FrameLayout;
-import com.noname81.lmt.PieMenu;
 
 class PiePointer implements PieMenu.PieView {
     private static final float EMPTY_ANGLE = 0.19634955f;
@@ -33,11 +32,11 @@ class PiePointer implements PieMenu.PieView {
     private float mWarpFactor;
 
     /* renamed from: mX */
-    private float f37mX;
+    private float mX;
     private float mXO;
 
     /* renamed from: mY */
-    private float f38mY;
+    private float mY;
     private float mYO;
 
     PiePointer(FrameLayout pieMenu, Context context, int color) {
@@ -57,7 +56,7 @@ class PiePointer implements PieMenu.PieView {
         this.mPointerPaintOutline.setAlpha(100);
         boolean z = false;
         this.mActivated = false;
-        this.mFromTheEgdes = this.mSettings.loadPiePointerFromEdges() > 0 ? true : z;
+        this.mFromTheEgdes = this.mSettings.loadPiePointerFromEdges() > 0 || z;
         double loadPiePointerWarpFactor = (double) this.mSettings.loadPiePointerWarpFactor();
         Double.isNaN(loadPiePointerWarpFactor);
         this.mWarpFactor = (float) (loadPiePointerWarpFactor / 100.0d);
@@ -88,12 +87,12 @@ class PiePointer implements PieMenu.PieView {
     public boolean drawBackground(Canvas canvas) {
         Point point;
         if (!(!this.mActivated || (point = this.mCenter) == null || this.mPolar == null)) {
-            canvas.drawLine((float) (point.x + 4), (float) (this.mCenter.y + 4), this.f37mX + 4.0f, this.f38mY + 4.0f, this.mPointerPaintOutline);
-            canvas.drawCircle((float) (this.mCenter.x + 4), (float) (this.mCenter.y + 4), this.mPolar.y, this.mPointerPaintOutline);
-            canvas.drawCircle(this.f37mX + 4.0f, this.f38mY + 4.0f, 16.0f, this.mPointerPaintOutline);
-            canvas.drawLine((float) this.mCenter.x, (float) this.mCenter.y, this.f37mX, this.f38mY, this.mPointerPaint);
+            canvas.drawLine((float) (point.x + STROKE_SIZE), (float) (this.mCenter.y + STROKE_SIZE), this.mX + 4.0f, this.mY + 4.0f, this.mPointerPaintOutline);
+            canvas.drawCircle((float) (this.mCenter.x + STROKE_SIZE), (float) (this.mCenter.y + STROKE_SIZE), this.mPolar.y, this.mPointerPaintOutline);
+            canvas.drawCircle(this.mX + 4.0f, this.mY + 4.0f, 16.0f, this.mPointerPaintOutline);
+            canvas.drawLine((float) this.mCenter.x, (float) this.mCenter.y, this.mX, this.mY, this.mPointerPaint);
             canvas.drawCircle((float) this.mCenter.x, (float) this.mCenter.y, this.mPolar.y, this.mPointerPaint);
-            canvas.drawCircle(this.f37mX, this.f38mY, 16.0f, this.mPointerPaint);
+            canvas.drawCircle(this.mX, this.mY, 16.0f, this.mPointerPaint);
         }
         return this.mActivated;
     }
@@ -108,27 +107,27 @@ class PiePointer implements PieMenu.PieView {
             }
         }
         if (2 == action && this.mActivated) {
-            this.f37mX = ((this.mWarpFactor - 1.0f) * (x - ((float) this.mCenter.x))) + x;
-            this.f38mY = ((this.mWarpFactor - 1.0f) * (y - ((float) this.mCenter.y))) + y;
+            this.mX = ((this.mWarpFactor - 1.0f) * (x - ((float) this.mCenter.x))) + x;
+            this.mY = ((this.mWarpFactor - 1.0f) * (y - ((float) this.mCenter.y))) + y;
             this.mXO = xo;
             this.mYO = yo;
             this.mPolar = polar;
             this.mPolar.y *= this.mWarpFactor;
-            float f = this.f37mX;
+            float f = this.mX;
             float f2 = this.mMargin;
             if (f < f2) {
-                this.f37mX = f2;
+                this.mX = f2;
             }
-            if (this.f37mX + this.mXO > ((float) this.mSettings.getScreenWidth()) - this.mMargin) {
-                this.f37mX = (((float) this.mSettings.getScreenWidth()) - this.mXO) - this.mMargin;
+            if (this.mX + this.mXO > ((float) this.mSettings.getScreenWidth()) - this.mMargin) {
+                this.mX = (((float) this.mSettings.getScreenWidth()) - this.mXO) - this.mMargin;
             }
-            float f3 = this.f38mY;
+            float f3 = this.mY;
             float f4 = this.mMargin;
             if (f3 < f4) {
-                this.f38mY = f4;
+                this.mY = f4;
             }
-            if (this.f38mY + this.mYO > ((float) this.mSettings.getScreenHeight()) - this.mMargin) {
-                this.f38mY = (((float) this.mSettings.getScreenHeight()) - this.mYO) - this.mMargin;
+            if (this.mY + this.mYO > ((float) this.mSettings.getScreenHeight()) - this.mMargin) {
+                this.mY = (((float) this.mSettings.getScreenHeight()) - this.mYO) - this.mMargin;
             }
             double d = (double) this.mRadius;
             double d2 = (double) this.mRadiusInc;
@@ -161,9 +160,9 @@ class PiePointer implements PieMenu.PieView {
     /* access modifiers changed from: public */
     private void sendTap() {
         if (this.mRootContext.isRootAvailable(false)) {
-            this.mRootContext.runCommandRemote("input tap " + ((int) (this.f37mX + this.mXO)) + " " + ((int) (this.f38mY + this.mYO)), true);
+            this.mRootContext.runCommandRemote("input tap " + ((int) (this.mX + this.mXO)) + " " + ((int) (this.mY + this.mYO)), true);
         } else if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, true)) {
-            AccessibilityHandler.performClick(this.f37mX + this.mXO, this.f38mY + this.mYO);
+            AccessibilityHandler.performClick(this.mX + this.mXO, this.mY + this.mYO);
         }
     }
 }

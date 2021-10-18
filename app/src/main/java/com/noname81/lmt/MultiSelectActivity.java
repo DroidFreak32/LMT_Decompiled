@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class MultiSelectActivity extends Activity implements AdapterView.OnItemClickListener {
     static final /* synthetic */ boolean $assertionsDisabled = false;
-    public static int AppSelectMode = 0;
+    public static int selectMode = 0;
     public static final int REQUEST_CREATE_SHORTCUT = 1;
     public static final int SelectActivity = 2;
     public static final int SelectBlacklisted = 3;
@@ -54,9 +54,9 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
         super.onCreate(bundle);
         this.mSettings = SettingsValues.getInstance(getApplicationContext());
         this.mPackageManager = getPackageManager();
-        List<Map<String, ?>> normalCommands = new LinkedList<>();
+        LinkedList<Map<String, ?>> normalCommands = new LinkedList<>();
         SeparatedListAdapter adapter = new SeparatedListAdapter(this);
-        int i = AppSelectMode;
+        int i = selectMode;
         if (i == 2) {
             try {
                 this.mPackageInfo = this.mPackageManager.getPackageInfo(this.mSettings.getCurrentAction().getString(), PackageManager.GET_ACTIVITIES);
@@ -107,7 +107,7 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
             adapter.addSection(getString(R.string.app_choose_an_app), new AppSimpleAdapter(this, normalCommands));
         }
         ListView list = new ListView(this);
-        list.setAdapter((ListAdapter) adapter);
+        list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         list.setDividerHeight(0);
         setContentView(list);
@@ -119,18 +119,18 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
             String shortcutString = ((Intent) intent.getExtras().get("android.intent.extra.shortcut.INTENT")).toUri(0);
             Resources res = getResources();
             Drawable iconDrawable = null;
-            Bitmap iconBitmap = (Bitmap) intent.getParcelableExtra("android.intent.extra.shortcut.ICON");
+            Bitmap iconBitmap = intent.getParcelableExtra("android.intent.extra.shortcut.ICON");
             if (iconBitmap != null) {
                 iconDrawable = new BitmapDrawable(res, iconBitmap);
             } else {
                 try {
-                    Intent.ShortcutIconResource iconResource = (Intent.ShortcutIconResource) intent.getParcelableExtra("android.intent.extra.shortcut.ICON_RESOURCE");
+                    Intent.ShortcutIconResource iconResource = intent.getParcelableExtra("android.intent.extra.shortcut.ICON_RESOURCE");
                     Resources otherResources = getPackageManager().getResourcesForApplication(iconResource.packageName);
                     iconDrawable = otherResources.getDrawable(otherResources.getIdentifier(iconResource.resourceName, null, null));
                 } catch (Exception e) {
                 }
             }
-            this.mSettings.setCurrentAction(this, new Action(33, shortcutString, iconDrawable));
+            this.mSettings.setCurrentAction(this, new Action(Action.Shortcut, shortcutString, iconDrawable));
         }
         super.onActivityResult(requestCode, resultCode, intent);
         finish();
@@ -138,13 +138,13 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
 
     @Override // android.widget.AdapterView.OnItemClickListener
     public void onItemClick(AdapterView<?> adapterView, View view, int pos, long arg3) {
-        int i = AppSelectMode;
+        int i = selectMode;
         if (i == 0) {
-            this.mSettings.setCurrentAction(this, new Action(2, this.mPackageInfos.get(pos - 1).packageName));
+            this.mSettings.setCurrentAction(this, new Action(Action.App, this.mPackageInfos.get(pos - 1).packageName));
             onBackPressed();
         } else if (i == 1) {
-            this.mSettings.setCurrentAction(this, new Action(2, this.mPackageInfos.get(pos - 1).applicationInfo.packageName));
-            AppSelectMode = 2;
+            this.mSettings.setCurrentAction(this, new Action(Action.App, this.mPackageInfos.get(pos - 1).applicationInfo.packageName));
+            selectMode = MultiSelectActivity.SelectActivity;
             startActivityForResult(new Intent(view.getContext(), MultiSelectActivity.class), 0);
             finish();
         } else if (i == 3) {
@@ -162,7 +162,7 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
             startActivityForResult(intent, 1);
         } else {
             SettingsValues settingsValues = this.mSettings;
-            settingsValues.setCurrentAction(this, new Action(27, this.mActivityInfos.get(pos - 1).packageName + "/" + this.mActivityInfos.get(pos - 1).name));
+            settingsValues.setCurrentAction(this, new Action(Action.Activity, this.mActivityInfos.get(pos - 1).packageName + "/" + this.mActivityInfos.get(pos - 1).name));
             onBackPressed();
         }
     }
@@ -174,7 +174,7 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
 
         public View getView(final int position, View convertView, ViewGroup parent) {
             View row = super.getView(position, convertView, parent);
-            ImageView icon = (ImageView) row.findViewById(R.id.listitem_icondescription_icon);
+            ImageView icon = row.findViewById(R.id.listitem_icondescription_icon);
             IconUtils.setMaxSizeForImageView(MultiSelectActivity.this.getApplicationContext(), icon);
             new AsyncDrawableTask(icon, R.drawable.none) {
                 /* class com.noname81.lmt.MultiSelectActivity.AppSimpleAdapter.AsyncTaskC05241 */
@@ -182,15 +182,15 @@ public class MultiSelectActivity extends Activity implements AdapterView.OnItemC
                 /* access modifiers changed from: protected */
                 @Override // com.noname81.lmt.AsyncDrawableTask
                 public Drawable doInBackground(Void... params) {
-                    if (MultiSelectActivity.AppSelectMode == 2) {
+                    if (MultiSelectActivity.selectMode == MultiSelectActivity.SelectActivity) {
                         return MultiSelectActivity.this.mPackageInfo.applicationInfo.loadIcon(MultiSelectActivity.this.mPackageManager);
                     }
-                    if (MultiSelectActivity.AppSelectMode == 5) {
+                    if (MultiSelectActivity.selectMode == MultiSelectActivity.SelectShortcut) {
                         return MultiSelectActivity.this.mShortcuts.get(position).loadIcon(MultiSelectActivity.this.mPackageManager);
                     }
                     return MultiSelectActivity.this.mPackageInfos.get(position).applicationInfo.loadIcon(MultiSelectActivity.this.mPackageManager);
                 }
-            }.execute(new Void[0]);
+            }.execute();
             return row;
         }
     }

@@ -75,8 +75,8 @@ class PieControl extends PieControlBase implements View.OnClickListener, View.On
                 if (i >= packageNamesArray.length) {
                     break;
                 }
-                Action asp = new Action(2, packageNamesArray[i]);
-                Action alp = new Action(1, BuildConfig.FLAVOR);
+                Action asp = new Action(Action.App, packageNamesArray[i]);
+                Action alp = new Action(Action.None, BuildConfig.FLAVOR);
                 Drawable drawable = asp.getDrawable(this.mContext, null, userImageScaling, showAppImages, false);
                 Drawable drawable2 = alp.getDrawable(this.mContext, null, userImageScaling, showAppImages, false);
                 if (i > 4) {
@@ -84,9 +84,7 @@ class PieControl extends PieControlBase implements View.OnClickListener, View.On
                 }
                 pieItemActionsForRecents.add(new PieItemAction(makeItem(drawable, drawable2, i2), asp, alp, true));
                 i++;
-                pieItemActionsForRecents = pieItemActionsForRecents;
-                packageNamesArray = packageNamesArray;
-                packageNames = packageNames;
+
             }
             this.mPie.clearItems();
             for (int i3 = 0; i3 < pieItemActionsForRecents.size(); i3++) {
@@ -165,16 +163,16 @@ class PieControl extends PieControlBase implements View.OnClickListener, View.On
     public boolean onKey(View v, int key, KeyEvent keyEvent) {
         for (int i = 0; i < this.mPieItemActions.size(); i++) {
             if (this.mPieItemActions.get(i).mPieItem.getView() == v) {
-                if (key == 36) {
-                    if (this.mPieItemActions.get(i).mClickAction.getType() == 44) {
+                if (key == KeyEvent.KEYCODE_H /* 36 */) {
+                    if (this.mPieItemActions.get(i).mClickAction.getType() == Action.PiePointer) {
                         this.mPie.activatePiePointer();
-                    } else if (this.mPieItemActions.get(i).mClickAction.getType() == 45) {
+                    } else if (this.mPieItemActions.get(i).mClickAction.getType() == Action.PieRecentApps) {
                         activatePieRecentApps();
                     }
-                } else if (key == 40) {
-                    if (this.mPieItemActions.get(i).mLongClickAction.getType() == 44) {
+                } else if (key == KeyEvent.KEYCODE_L /* 40 */) {
+                    if (this.mPieItemActions.get(i).mLongClickAction.getType() == Action.PiePointer) {
                         this.mPie.activatePiePointer();
-                    } else if (this.mPieItemActions.get(i).mLongClickAction.getType() == 45) {
+                    } else if (this.mPieItemActions.get(i).mLongClickAction.getType() == Action.PieRecentApps) {
                         activatePieRecentApps();
                     }
                 }
@@ -187,16 +185,16 @@ class PieControl extends PieControlBase implements View.OnClickListener, View.On
         int userImageScaling = this.mSettings.loadPieShowScaleUserImages();
         int showAppImages = this.mSettings.loadPieShowScaleAppImages();
         this.mPieItemActions.clear();
-        Action a1sp = new Action(7);
-        Action a1lp = new Action(30);
-        Action a2sp = new Action(3);
-        Action a2lp = new Action(26, "26");
-        Action a3sp = new Action(9);
-        Action a3lp = new Action(31);
-        Action a4sp = new Action(5);
-        Action a4lp = new Action(2, "com.android.settings");
-        Action a5sp = new Action(10);
-        Action a5lp = new Action(11);
+        Action a1sp = new Action(Action.Back);
+        Action a1lp = new Action(Action.KillApp);
+        Action a2sp = new Action(Action.Home);
+        Action a2lp = new Action(Action.Key, "26");
+        Action a3sp = new Action(Action.RecentApps);
+        Action a3lp = new Action(Action.KillAllApps);
+        Action a4sp = new Action(Action.Menu);
+        Action a4lp = new Action(Action.App, "com.android.settings");
+        Action a5sp = new Action(Action.Search);
+        Action a5lp = new Action(Action.SearchLongpress);
         this.mPieItemActions.add(new PieItemAction(makeItem(a1sp.getDrawable(this.mContext, IconUtils.getNamePie(1), userImageScaling, showAppImages, false), a1lp.getDrawable(this.mContext, IconUtils.getNamePie(2), userImageScaling, showAppImages, false), 1), a1sp, a1lp, false));
         this.mPieItemActions.add(new PieItemAction(makeItem(a2sp.getDrawable(this.mContext, IconUtils.getNamePie(3), userImageScaling, showAppImages, false), a2lp.getDrawable(this.mContext, IconUtils.getNamePie(4), userImageScaling, showAppImages, false), 1), a2sp, a2lp, false));
         this.mPieItemActions.add(new PieItemAction(makeItem(a3sp.getDrawable(this.mContext, IconUtils.getNamePie(5), userImageScaling, showAppImages, false), a3lp.getDrawable(this.mContext, IconUtils.getNamePie(6), userImageScaling, showAppImages, false), 1), a3sp, a3lp, false));
