@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class PieMenu extends FrameLayout {
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
     private static final int MAX_LEVELS = 5;
     private static final String TAG = "LMT::PieMenu";
     private int mAnimationTime;

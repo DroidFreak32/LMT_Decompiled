@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PieContainer {
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
     private static final String TAG = "LMT::PieContainer";
     private boolean mAddedLayout1 = false;
     private boolean mAddedLayout2 = false;

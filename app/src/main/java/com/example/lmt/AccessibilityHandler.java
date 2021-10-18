@@ -17,7 +17,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
 
 public class AccessibilityHandler extends AccessibilityService {
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
     private static final String TAG = "LMT::Accessibility";
     private static AccessibilityHandler instance = null;
     private static boolean mInitialized = false;

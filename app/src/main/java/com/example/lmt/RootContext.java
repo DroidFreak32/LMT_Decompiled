@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 
 public class RootContext {
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
     private static final String PREFIX = "";
     private static final String TAG = "LMT::RootContext";
     private static RootContext instance = null;

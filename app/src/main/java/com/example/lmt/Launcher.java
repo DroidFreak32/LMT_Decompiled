@@ -23,7 +23,7 @@ import java.util.TimerTask;
 
 class Launcher {
     static final /* synthetic */ boolean $assertionsDisabled = false;
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
     private static final String TAG = "LMT::Launcher";
     private static Launcher instance = null;
     private ActivityManager mActivityManager;
