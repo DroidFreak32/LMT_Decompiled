@@ -1,5 +1,6 @@
 package com.noname81.lmt;
 
+import android.accessibilityservice.AccessibilityService;
 import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.ActivityNotFoundException;
@@ -14,6 +15,7 @@ import android.support.v7.widget.ActivityChooserView;
 //import androidx.appcompat.widget.ActivityChooserView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -185,9 +187,9 @@ class Launcher {
             Log.d(TAG, "doHomeAction()");
         }
         if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, false)) {
-            AccessibilityHandler.performAction(2);
+            AccessibilityHandler.performAction(AccessibilityService.GLOBAL_ACTION_HOME);
         } else if (this.mRootContext.isRootAvailable(false)) {
-            doKeyAction(3);
+            doKeyAction(KeyEvent.KEYCODE_HOME);
         } else {
             Intent startMain = new Intent("android.intent.action.MAIN");
             startMain.addCategory("android.intent.category.HOME");
@@ -208,9 +210,9 @@ class Launcher {
             Log.d(TAG, "doRecentAppsAction()");
         }
         if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, false)) {
-            AccessibilityHandler.performAction(3);
+            AccessibilityHandler.performAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
         } else if (this.mRootContext.isRootAvailable(false)) {
-            doKeyAction(187);
+            doKeyAction(KeyEvent.KEYCODE_APP_SWITCH);
         } else {
             AccessibilityHandler.isAccessibilityAvailable(this.mContext, false);
         }
@@ -220,7 +222,7 @@ class Launcher {
         if (DEBUG) {
             Log.d(TAG, "doMenuAction()");
         }
-        doKeyAction(82);
+        doKeyAction(KeyEvent.KEYCODE_MENU);
     }
 
     private void doMenuLongpressAction() {
@@ -235,9 +237,9 @@ class Launcher {
             Log.d(TAG, "doBackAction()");
         }
         if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, false)) {
-            AccessibilityHandler.performAction(1);
+            AccessibilityHandler.performAction(AccessibilityService.GLOBAL_ACTION_BACK);
         } else if (this.mRootContext.isRootAvailable(false)) {
-            doKeyAction(4);
+            doKeyAction(KeyEvent.KEYCODE_BACK);
         } else {
             AccessibilityHandler.isAccessibilityAvailable(this.mContext, true);
         }
@@ -255,7 +257,7 @@ class Launcher {
             Log.d(TAG, "doSearchAction()");
         }
         if (this.mRootContext.isRootAvailable(false)) {
-            doKeyAction(84);
+            doKeyAction(KeyEvent.KEYCODE_SEARCH);
             return;
         }
         Intent ni = new Intent("android.intent.action.SEARCH");
@@ -371,7 +373,7 @@ class Launcher {
             Log.d(TAG, "doPowerMenuAction()");
         }
         if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, false)) {
-            AccessibilityHandler.performAction(6);
+            AccessibilityHandler.performAction(AccessibilityService.GLOBAL_ACTION_POWER_DIALOG);
         } else if (this.mRootContext.isRootAvailable(false)) {
             doKeyAction(1026);
         } else {
@@ -642,7 +644,7 @@ class Launcher {
             Log.d(TAG, "doOpenNotificationBar()");
         }
         if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, false)) {
-            AccessibilityHandler.performAction(4);
+            AccessibilityHandler.performAction(AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS);
         } else if (Build.VERSION.SDK_INT >= 17) {
             try {
                 Class.forName("android.app.StatusBarManager").getMethod("expandNotificationsPanel", new Class[0]).invoke(this.mContext.getApplicationContext().getSystemService("statusbar"), new Object[0]);
@@ -663,7 +665,7 @@ class Launcher {
             Log.d(TAG, "doOpenQuickSettings()");
         }
         if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, false)) {
-            AccessibilityHandler.performAction(5);
+            AccessibilityHandler.performAction(AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS);
         } else if (Build.VERSION.SDK_INT >= 17) {
             try {
                 Class.forName("android.app.StatusBarManager").getMethod("expandSettingsPanel", new Class[0]).invoke(this.mContext.getApplicationContext().getSystemService("statusbar"), new Object[0]);
@@ -727,7 +729,7 @@ class Launcher {
             Log.d(TAG, "doSplitScreenAction()");
         }
         if (AccessibilityHandler.isAccessibilityAvailable(this.mContext, false)) {
-            AccessibilityHandler.performAction(7);
+            AccessibilityHandler.performAction(AccessibilityService.GLOBAL_ACTION_TOGGLE_SPLIT_SCREEN);
         } else {
             AccessibilityHandler.isAccessibilityAvailable(this.mContext, true);
         }
