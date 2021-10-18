@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="3100" android:versionName="3.1" android:compileSdkVersion="29" android:compileSdkVersionCodename="10" package="com.example.lmt" platformBuildVersionCode="29" platformBuildVersionName="10">
-    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="29"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="3100"
+    android:versionName="3.1"
+    android:compileSdkVersion="29"
+    android:compileSdkVersionCodename="10"
+    package="com.example.lmt">
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
