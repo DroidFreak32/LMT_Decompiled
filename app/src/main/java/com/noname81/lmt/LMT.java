@@ -34,17 +34,19 @@ public class LMT extends Activity {
         this.mViewPager.setId(R.id.pager);
         setContentView(this.mViewPager);
         ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        createTabs();
-        if (savedInstanceState != null) {
-            actionBar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            actionBar.setDisplayShowHomeEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(false);
+            createTabs();
+            if (savedInstanceState != null) {
+                actionBar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
+            }
+            if (Debug.isDebuggerConnected()) {
+                DebugHelper.getInstance().showDebugMenu(this);
+            }
+            checkAndRequestPermissions();
         }
-        if (Debug.isDebuggerConnected()) {
-            DebugHelper.getInstance().showDebugMenu(this);
-        }
-        checkAndRequestPermissions();
     }
 
     private void createTabs() {
