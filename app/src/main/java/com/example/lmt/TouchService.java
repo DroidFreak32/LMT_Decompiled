@@ -21,7 +21,7 @@ import java.lang.ref.WeakReference;
 public class TouchService extends Service {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final String TAG = "LMT::TouchService";
-    private String NOTIFICATION_CHANNEL_ID = "com.noname81.lmt.TouchService";
+    private String NOTIFICATION_CHANNEL_ID = "com.example.lmt.TouchService";
     private String NOTIFICATION_CHANNEL_NAME = "TouchService";
     private Launcher mLauncher;
     private MessageHandler mMessageHandler = new MessageHandler(this);
