@@ -1,6 +1,6 @@
 # LMT_Decompiled
 
-Unstable decompiled port of the amazing LMT app by @noname81 [on XDA](https://forum.xda-developers.com/t/app-root-lmt-launcher-v2-9.1330150/page-545. 
+Unstable decompiled port of the amazing LMT app by @noname81 [on XDA](https://forum.xda-developers.com/t/app-root-lmt-launcher-v2-9.1330150/page-545)
 
 Decompiled using jadx - https://github.com/skylot/jadx
 
